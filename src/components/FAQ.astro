@@ -1,0 +1,215 @@
+---
+
+---
+
+<section id="faq" class="section faq">
+	<div class="container">
+		<h2 class="section-title">Frequently Asked Questions</h2>
+		<div class="faq-container">
+			<div class="faq-item">
+				<button class="faq-question" aria-expanded="false">
+					<span>What is the cut-off time for the race?</span>
+					<span class="faq-icon">+</span>
+				</button>
+				<div class="faq-answer">
+					<p>The official cut-off time is 16 hours from the start. There are intermediate cut-offs at major checkpoints to ensure runner safety and race logistics.</p>
+				</div>
+			</div>
+
+			<div class="faq-item">
+				<button class="faq-question" aria-expanded="false">
+					<span>What kind of terrain should I expect?</span>
+					<span class="faq-icon">+</span>
+				</button>
+				<div class="faq-answer">
+					<p>The route includes single track trails, coastal paths, forest boardwalks, river crossings, and some road sections. Expect technical terrain with roots, rocks, and varying surface conditions.</p>
+				</div>
+			</div>
+
+			<div class="faq-item">
+				<button class="faq-question" aria-expanded="false">
+					<span>Are there mandatory gear requirements?</span>
+					<span class="faq-icon">+</span>
+				</button>
+				<div class="faq-answer">
+					<p>Yes, mandatory gear includes: emergency blanket, whistle, headlamp with spare batteries, first aid supplies, and minimum 1L water capacity. Full gear list provided upon registration.</p>
+				</div>
+			</div>
+
+			<div class="faq-item">
+				<button class="faq-question" aria-expanded="false">
+					<span>How many aid stations are there?</span>
+					<span class="faq-icon">+</span>
+				</button>
+				<div class="faq-answer">
+					<p>There are 8 fully stocked aid stations positioned approximately every 12-15km along the route. Each provides water, sports drinks, food, and basic medical support.</p>
+				</div>
+			</div>
+
+			<div class="faq-item">
+				<button class="faq-question" aria-expanded="false">
+					<span>Can I bring pacers or support crew?</span>
+					<span class="faq-icon">+</span>
+				</button>
+				<div class="faq-answer">
+					<p>Pacers are allowed from the 50km mark onwards. Support crews can access designated areas only. All pacers must register and pay a small fee for race insurance.</p>
+				</div>
+			</div>
+
+			<div class="faq-item">
+				<button class="faq-question" aria-expanded="false">
+					<span>What's included in the entry fee?</span>
+					<span class="faq-icon">+</span>
+				</button>
+				<div class="faq-answer">
+					<p>Entry includes: race bib and timing chip, finisher medal and t-shirt, post-race meal, aid station support, medical coverage, and shuttle transport to the start line.</p>
+				</div>
+			</div>
+
+			<div class="faq-item">
+				<button class="faq-question" aria-expanded="false">
+					<span>Is there accommodation available?</span>
+					<span class="faq-icon">+</span>
+				</button>
+				<div class="faq-answer">
+					<p>We have partnerships with local lodges and guesthouses offering special rates for participants. Camping options are also available. Book early as accommodation fills up quickly.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	function initFAQ() {
+		const faqItems = document.querySelectorAll('.faq-item');
+		
+		faqItems.forEach(item => {
+			const question = item.querySelector('.faq-question');
+			const answer = item.querySelector('.faq-answer');
+			const icon = item.querySelector('.faq-icon');
+			
+			if (!question || !answer || !icon) return;
+			
+			question.addEventListener('click', () => {
+				const isExpanded = question.getAttribute('aria-expanded') === 'true';
+				
+				// Close all other items
+				faqItems.forEach(otherItem => {
+					const otherQuestion = otherItem.querySelector('.faq-question');
+					const otherAnswer = otherItem.querySelector('.faq-answer');
+					const otherIcon = otherItem.querySelector('.faq-icon');
+					
+					if (otherItem !== item && otherQuestion && otherAnswer && otherIcon) {
+						otherQuestion.setAttribute('aria-expanded', 'false');
+						otherAnswer.style.maxHeight = '0';
+						otherIcon.textContent = '+';
+						otherItem.classList.remove('active');
+					}
+				});
+				
+				// Toggle current item
+				if (isExpanded) {
+					question.setAttribute('aria-expanded', 'false');
+					answer.style.maxHeight = '0';
+					icon.textContent = '+';
+					item.classList.remove('active');
+				} else {
+					question.setAttribute('aria-expanded', 'true');
+					answer.style.maxHeight = answer.scrollHeight + 'px';
+					icon.textContent = '−';
+					item.classList.add('active');
+				}
+			});
+		});
+	}
+
+	// Initialize FAQ when DOM is loaded
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initFAQ);
+	} else {
+		initFAQ();
+	}
+</script>
+
+<style>
+	.faq {
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, var(--background-color) 100%);
+	}
+
+	.faq-container {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.faq-item {
+		border: 1px solid var(--border-color);
+		border-radius: 12px;
+		margin-bottom: 1rem;
+		overflow: hidden;
+		transition: all 0.3s ease;
+	}
+
+	.faq-item:hover {
+		border-color: var(--primary-color);
+	}
+
+	.faq-item.active {
+		border-color: var(--primary-color);
+		box-shadow: 0 4px 12px rgba(205, 213, 174, 0.1);
+	}
+
+	.faq-question {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1.5rem;
+		background: var(--card-background);
+		color: var(--text-primary);
+		font-size: 1.1rem;
+		font-weight: 500;
+		text-align: left;
+		border: none;
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.faq-question:hover {
+		background: rgba(205, 213, 174, 0.05);
+	}
+
+	.faq-icon {
+		font-size: 1.5rem;
+		color: var(--primary-color);
+		font-weight: 300;
+		transition: transform 0.3s ease;
+	}
+
+	.faq-item.active .faq-icon {
+		transform: rotate(45deg);
+	}
+
+	.faq-answer {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.3s ease;
+	}
+
+	.faq-answer p {
+		padding: 0 1.5rem 1.5rem 1.5rem;
+		color: var(--text-secondary);
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	@media (max-width: 768px) {
+		.faq-question {
+			padding: 1.25rem;
+			font-size: 1rem;
+		}
+
+		.faq-answer p {
+			padding: 0 1.25rem 1.25rem 1.25rem;
+		}
+	}
+</style>

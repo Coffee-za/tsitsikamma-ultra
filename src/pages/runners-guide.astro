@@ -1,0 +1,772 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Runners Guide - Tsitsikamma Ultra 2025 | Essential Information">
+	<Header />
+	<main>
+		<section class="hero-section">
+			<div class="container">
+				<div class="hero-content">
+					<div class="hero-text">
+						<h1 class="page-title">Runner's Guide</h1>
+						<p class="page-description">
+							Everything you need to know for race day. From mandatory gear requirements to race rules and cut-off times, this comprehensive guide will help you prepare for the ultimate Tsitsikamma trail running experience.
+						</p>
+						<a href="/route.gpx" class="btn btn-primary download-btn" download="tsitsikamma-ultra-route.gpx">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+								<polyline points="7,10 12,15 17,10"/>
+								<line x1="12" y1="15" x2="12" y2="3"/>
+							</svg>
+							Download GPX Route
+						</a>
+					</div>
+					<div class="hero-image">
+						<img src="/Guide_Hero_Collage.webp" alt="Trail runner in forest" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section strava-section">
+			<div class="container">
+				<h2 class="section-title">Official Race Route</h2>
+				<div class="strava-container">
+					<div class="strava-embed-placeholder" data-embed-type="route" data-embed-id="3370014619132001496" data-full-width="true" data-style="hybrid" data-map-hash="9.9/-33.9336/23.7656" data-from-embed="true">
+						<div style="width: 100%; height: 400px; background: var(--card-background); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+							Loading Strava route...
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<script>
+			// Load Strava embed script
+			const script = document.createElement('script');
+			script.src = 'https://strava-embeds.com/embed.js';
+			script.async = true;
+			document.head.appendChild(script);
+		</script>
+
+		<section class="section schedule-section">
+			<div class="container">
+				<h2 class="section-title">Race Schedule</h2>
+				<div class="schedule-container">
+					<div class="schedule-item">
+						<div class="schedule-date">Friday 28th</div>
+						<div class="schedule-time">18:00</div>
+						<div class="schedule-event">Race Briefing</div>
+						<div class="schedule-location">The Trail Shop<br>Plettenberg Bay</div>
+					</div>
+
+					<div class="schedule-item shuttle">
+						<div class="schedule-date">Saturday 29th</div>
+						<div class="schedule-time">05:00</div>
+						<div class="schedule-event">Shuttle Departure</div>
+						<div class="schedule-location">From Covie</div>
+						<div class="schedule-note">NB: Important transport timing</div>
+					</div>
+
+					<div class="schedule-item highlight">
+						<div class="schedule-date">Saturday 29th</div>
+						<div class="schedule-time">06:00</div>
+						<div class="schedule-event">Race Start Time</div>
+						<div class="schedule-location">TotalEnergies Petroport Tsitsikamma<br>(Headlamp Start)</div>
+					</div>
+
+					<div class="schedule-item">
+						<div class="schedule-date">Saturday 29th</div>
+						<div class="schedule-time">18:00</div>
+						<div class="schedule-event">Race Finish</div>
+						<div class="schedule-location">Covie<br>(12 hours cut-off)</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section guide-content">
+			<div class="container">
+				<div class="accordion-container">
+					<div class="accordion-item">
+						<button class="accordion-question" aria-expanded="false">
+							<span>Terms & Conditions</span>
+							<span class="accordion-icon">+</span>
+						</button>
+						<div class="accordion-answer">
+							<div class="accordion-content">
+								<h4>Race Entry & Registration</h4>
+								<ul>
+									<li>Entry fees are non-refundable except in cases of race cancellation due to circumstances beyond our control</li>
+									<li>Participants must be 18 years or older on race day</li>
+									<li>Medical clearance certificate required for participants over 65</li>
+									<li>Race numbers are non-transferable between participants</li>
+								</ul>
+
+								<h4>Liability & Insurance</h4>
+								<ul>
+									<li>Participants enter at their own risk and must sign a comprehensive indemnity form</li>
+									<li>The race organizers are not liable for any injury, loss, or damage during the event</li>
+									<li>Participants are strongly advised to have personal medical insurance</li>
+									<li>Emergency medical support will be available on course</li>
+								</ul>
+
+								<h4>Race Cancellation</h4>
+								<ul>
+									<li>The race may be cancelled due to extreme weather conditions or safety concerns</li>
+									<li>In case of cancellation, entry fees will be refunded minus processing costs</li>
+									<li>Participants will be notified via email and social media channels</li>
+								</ul>
+
+								<h4>Code of Conduct</h4>
+								<ul>
+									<li>Respect for fellow participants, volunteers, and the environment is mandatory</li>
+									<li>Unsporting behavior may result in disqualification</li>
+									<li>Littering will result in immediate disqualification</li>
+									<li>Follow all instructions from race officials and marshals</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion-item">
+						<button class="accordion-question" aria-expanded="false">
+							<span>Required Gear</span>
+							<span class="accordion-icon">+</span>
+						</button>
+						<div class="accordion-answer">
+							<div class="accordion-content">
+								<h4>Mandatory Equipment</h4>
+								<p class="gear-warning">All mandatory items will be checked at registration. Missing items will prevent race start.</p>
+								
+								<div class="gear-category">
+									<h5>Safety Equipment</h5>
+									<ul>
+										<li>Emergency blanket (space blanket)</li>
+										<li>Whistle (attached to person, not pack)</li>
+										<li>Headlamp with spare batteries</li>
+										<li>Basic first aid supplies (plasters, antiseptic)</li>
+										<li>Mobile phone in waterproof case</li>
+									</ul>
+								</div>
+
+								<div class="gear-category">
+									<h5>Hydration & Nutrition</h5>
+									<ul>
+										<li>Minimum 1L water carrying capacity</li>
+										<li>Emergency food (energy bars, gels)</li>
+										<li>Electrolyte replacement capability</li>
+									</ul>
+								</div>
+
+								<div class="gear-category">
+									<h5>Clothing & Protection</h5>
+									<ul>
+										<li>Waterproof jacket (minimum 10,000mm rating)</li>
+										<li>Long-sleeved thermal top</li>
+										<li>Full-length running tights or pants</li>
+										<li>Warm hat or beanie</li>
+										<li>Gloves</li>
+									</ul>
+								</div>
+
+								<h4>Recommended Equipment</h4>
+								<ul>
+									<li>Trail running shoes with good grip</li>
+									<li>Gaiters to prevent debris entry</li>
+									<li>Trekking poles (optional but recommended)</li>
+									<li>GPS watch or navigation device</li>
+									<li>Sunglasses and sunscreen</li>
+									<li>Spare socks and underwear</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion-item">
+						<button class="accordion-question" aria-expanded="false">
+							<span>Race Rules</span>
+							<span class="accordion-icon">+</span>
+						</button>
+						<div class="accordion-answer">
+							<div class="accordion-content">
+								<h4>General Rules</h4>
+								<ul>
+									<li>Follow the marked route at all times - shortcuts will result in disqualification</li>
+									<li>Carry your race number visible on your front throughout the race</li>
+									<li>Report to all checkpoints and aid stations for timing verification</li>
+									<li>Assist fellow runners in distress when safe to do so</li>
+								</ul>
+
+								<h4>Cut-off Times</h4>
+								<div class="cutoff-table">
+									<div class="cutoff-row">
+										<span class="cutoff-location">Start</span>
+										<span class="cutoff-distance">0km</span>
+										<span class="cutoff-time">06:00</span>
+									</div>
+									<div class="cutoff-row">
+										<span class="cutoff-location">Checkpoint 1</span>
+										<span class="cutoff-distance">25km</span>
+										<span class="cutoff-time">12:00</span>
+									</div>
+									<div class="cutoff-row">
+										<span class="cutoff-location">Checkpoint 2</span>
+										<span class="cutoff-distance">40km</span>
+										<span class="cutoff-time">16:00</span>
+									</div>
+									<div class="cutoff-row">
+										<span class="cutoff-location">Finish</span>
+										<span class="cutoff-distance">50km</span>
+										<span class="cutoff-time">18:00</span>
+									</div>
+								</div>
+
+								<h4>Support & Pacers</h4>
+								<ul>
+									<li>Pacers are allowed from the 25km checkpoint onwards</li>
+									<li>All pacers must register and pay the pacer fee</li>
+									<li>Support crews may only access designated areas</li>
+									<li>No support allowed between official aid stations</li>
+								</ul>
+
+								<h4>Environmental Rules</h4>
+								<ul>
+									<li>Pack out all trash - leave no trace</li>
+									<li>Stay on designated trails to protect vegetation</li>
+									<li>Do not disturb wildlife</li>
+									<li>Respect private property boundaries</li>
+								</ul>
+
+								<h4>Disqualification</h4>
+								<p>Participants may be disqualified for:</p>
+								<ul>
+									<li>Missing mandatory gear at gear check</li>
+									<li>Littering or environmental damage</li>
+									<li>Receiving unauthorized assistance</li>
+									<li>Unsporting conduct or dangerous behavior</li>
+									<li>Missing cut-off times</li>
+									<li>Leaving the marked course</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	function initAccordion() {
+		const accordionItems = document.querySelectorAll('.accordion-item');
+		
+		accordionItems.forEach(item => {
+			const question = item.querySelector('.accordion-question');
+			const answer = item.querySelector('.accordion-answer');
+			const icon = item.querySelector('.accordion-icon');
+			
+			if (!question || !answer || !icon) return;
+			
+			question.addEventListener('click', () => {
+				const isExpanded = question.getAttribute('aria-expanded') === 'true';
+				
+				// Close all other items
+				accordionItems.forEach(otherItem => {
+					const otherQuestion = otherItem.querySelector('.accordion-question');
+					const otherAnswer = otherItem.querySelector('.accordion-answer');
+					const otherIcon = otherItem.querySelector('.accordion-icon');
+					
+					if (otherItem !== item && otherQuestion && otherAnswer && otherIcon) {
+						otherQuestion.setAttribute('aria-expanded', 'false');
+						otherAnswer.style.maxHeight = '0';
+						otherIcon.textContent = '+';
+						otherItem.classList.remove('active');
+					}
+				});
+				
+				// Toggle current item
+				if (isExpanded) {
+					question.setAttribute('aria-expanded', 'false');
+					answer.style.maxHeight = '0';
+					icon.textContent = '+';
+					item.classList.remove('active');
+				} else {
+					question.setAttribute('aria-expanded', 'true');
+					answer.style.maxHeight = answer.scrollHeight + 'px';
+					icon.textContent = '−';
+					item.classList.add('active');
+				}
+			});
+		});
+	}
+
+	// Initialize accordion when DOM is loaded
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initAccordion);
+	} else {
+		initAccordion();
+	}
+
+	// Excuse Generator
+	const excuses = [
+		"My GPS watch is updating its firmware that day",
+		"I need to wash my hair... for 12 hours straight",
+		"My running shoes are in a committed relationship with my couch",
+		"I'm allergic to mountains on weekends",
+		"My legs are on strike until further notice",
+		"I have a very important Netflix series to binge",
+		"My doctor says I'm allergic to early morning starts",
+		"I'm saving my energy for the zombie apocalypse",
+		"My trail running app crashed and took my motivation with it",
+		"I promised my bed I'd spend quality time together",
+		"I'm in training to become a professional couch potato",
+		"My running playlist is having an existential crisis",
+		"I need to stay home and guard my snacks from burglars",
+		"I'm participating in a very competitive sleeping tournament",
+		"My running shorts are in the witness protection program"
+	];
+
+	function generateExcuse() {
+		const randomIndex = Math.floor(Math.random() * excuses.length);
+		const excuse = excuses[randomIndex];
+		const output = document.getElementById('excuseOutput');
+		
+		if (output) {
+			output.textContent = `"${excuse}"`;
+			output.style.opacity = '0';
+			
+			// Fade in animation
+			setTimeout(() => {
+				output.style.opacity = '1';
+			}, 100);
+		}
+	}
+
+	// Initialize excuse generator
+	function initExcuseGenerator() {
+		const button = document.getElementById('excuseGenerator');
+		if (button) {
+			button.addEventListener('click', generateExcuse);
+		}
+	}
+
+	// Initialize excuse generator when DOM is loaded
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initExcuseGenerator);
+	} else {
+		initExcuseGenerator();
+	}
+</script>
+
+<style>
+	main {
+		padding-top: 80px;
+	}
+
+	.hero-section {
+		background: linear-gradient(135deg, var(--background-color) 0%, rgba(34, 51, 59, 0.8) 100%);
+		padding: 4rem 0;
+	}
+
+	.hero-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+		align-items: center;
+	}
+
+	.hero-text {
+		text-align: left;
+	}
+
+	.hero-image {
+		display: flex;
+		justify-content: center;
+	}
+
+	.hero-image img {
+		width: 100%;
+		max-width: 500px;
+		height: 280px;
+		aspect-ratio: 16/9;
+		object-fit: cover;
+		border-radius: 12px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+	}
+
+	.page-title {
+		font-size: 3rem;
+		color: var(--primary-color);
+		margin-bottom: 1rem;
+	}
+
+	.page-description {
+		font-size: 1.125rem;
+		color: var(--text-secondary);
+		line-height: 1.6;
+		margin-bottom: 2rem;
+		max-width: 500px;
+	}
+
+	.download-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 1rem;
+		padding: 1rem 1.5rem;
+	}
+
+	.download-btn svg {
+		flex-shrink: 0;
+	}
+
+	.page-subtitle {
+		font-size: 2rem;
+		color: var(--text-primary);
+		font-weight: 400;
+	}
+
+	.page-subtitle-old {
+		font-size: 1.25rem;
+		color: var(--text-secondary);
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.guide-content {
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, var(--background-color) 100%);
+	}
+
+	.accordion-container {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.accordion-item {
+		border: 1px solid var(--border-color);
+		border-radius: 12px;
+		margin-bottom: 1rem;
+		overflow: hidden;
+		transition: all 0.3s ease;
+	}
+
+	.accordion-item:hover {
+		border-color: var(--primary-color);
+	}
+
+	.accordion-item.active {
+		border-color: var(--primary-color);
+		box-shadow: 0 4px 12px rgba(205, 213, 174, 0.1);
+	}
+
+	.accordion-question {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1.5rem;
+		background: var(--card-background);
+		color: var(--text-primary);
+		font-size: 1.25rem;
+		font-weight: 600;
+		text-align: left;
+		border: none;
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.accordion-question:hover {
+		background: rgba(205, 213, 174, 0.05);
+	}
+
+	.accordion-icon {
+		font-size: 1.5rem;
+		color: var(--primary-color);
+		font-weight: 300;
+		transition: transform 0.3s ease;
+	}
+
+	.accordion-item.active .accordion-icon {
+		transform: rotate(45deg);
+	}
+
+	.accordion-answer {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.3s ease;
+	}
+
+	.accordion-content {
+		padding: 0 1.5rem 1.5rem 1.5rem;
+		color: var(--text-secondary);
+		line-height: 1.6;
+	}
+
+	.accordion-content h4 {
+		color: var(--primary-color);
+		margin: 1.5rem 0 1rem 0;
+		font-size: 1.25rem;
+	}
+
+	.accordion-content h4:first-child {
+		margin-top: 0;
+	}
+
+	.accordion-content h5 {
+		color: var(--accent-color);
+		margin: 1rem 0 0.5rem 0;
+		font-size: 1.1rem;
+	}
+
+	.accordion-content ul {
+		margin: 0.5rem 0 1rem 1rem;
+		padding: 0;
+	}
+
+	.accordion-content li {
+		margin-bottom: 0.5rem;
+		list-style-type: disc;
+	}
+
+	.gear-warning {
+		background: rgba(239, 68, 68, 0.1);
+		border: 1px solid rgba(239, 68, 68, 0.3);
+		border-radius: 8px;
+		padding: 1rem;
+		margin: 1rem 0;
+		color: #FCA5A5;
+		font-weight: 500;
+	}
+
+	.gear-category {
+		margin: 1.5rem 0;
+		padding: 1rem;
+		background: rgba(205, 213, 174, 0.05);
+		border-radius: 8px;
+		border-left: 4px solid var(--primary-color);
+	}
+
+	.cutoff-table {
+		background: rgba(205, 213, 174, 0.05);
+		border-radius: 8px;
+		padding: 1rem;
+		margin: 1rem 0;
+	}
+
+	.cutoff-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		padding: 0.75rem 0;
+		border-bottom: 1px solid var(--border-color);
+		font-weight: 500;
+	}
+
+	.cutoff-row:last-child {
+		border-bottom: none;
+	}
+
+	.cutoff-row:first-child {
+		font-weight: 600;
+		color: var(--primary-color);
+		border-bottom: 2px solid var(--primary-color);
+	}
+
+	.cutoff-location {
+		color: var(--text-primary);
+	}
+
+	.cutoff-distance {
+		text-align: center;
+		color: var(--accent-color);
+	}
+
+	.cutoff-time {
+		text-align: right;
+		color: var(--primary-color);
+	}
+
+	@media (max-width: 768px) {
+		main {
+			padding-top: 70px;
+		}
+
+		.hero-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+			text-align: center;
+		}
+
+		.hero-text {
+			text-align: center;
+		}
+
+		.hero-image img {
+			height: 210px;
+			aspect-ratio: 16/9;
+		}
+
+		.page-title {
+			font-size: 2.25rem;
+		}
+
+		.page-description {
+			font-size: 1rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.download-btn {
+			font-size: 0.9rem;
+			padding: 0.875rem 1.25rem;
+		}
+
+		.page-subtitle-old {
+			font-size: 1.125rem;
+		}
+
+		.accordion-question {
+			padding: 1.25rem;
+			font-size: 1.125rem;
+		}
+
+		.accordion-content {
+			padding: 0 1.25rem 1.25rem 1.25rem;
+		}
+
+		.cutoff-row {
+			grid-template-columns: 1fr;
+			gap: 0.25rem;
+			text-align: center;
+		}
+
+		.cutoff-distance,
+		.cutoff-time {
+			text-align: center;
+		}
+	}
+
+	.strava-section {
+		background: rgba(255, 255, 255, 0.02);
+		padding: 3rem 0;
+	}
+
+	.strava-container {
+		max-width: 100%;
+		margin: 0 auto;
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	}
+
+	.strava-embed-placeholder {
+		width: 100%;
+		min-height: 400px;
+		background: var(--card-background);
+		border-radius: 12px;
+	}
+
+	.schedule-section {
+		background: rgba(255, 255, 255, 0.02);
+		padding: 3rem 0;
+	}
+
+	.schedule-container {
+		display: flex;
+		gap: 1rem;
+		justify-content: space-between;
+		max-width: 1000px;
+		margin: 0 auto;
+		overflow-x: auto;
+		padding-bottom: 1rem;
+	}
+
+	.schedule-item {
+		background: var(--card-background);
+		border: 1px solid var(--border-color);
+		border-radius: 12px;
+		padding: 1.5rem;
+		text-align: center;
+		transition: all 0.3s ease;
+		position: relative;
+		flex: 1;
+		min-width: 220px;
+	}
+
+	.schedule-item:hover {
+		transform: translateY(-4px);
+		border-color: var(--primary-color);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+	}
+
+	.schedule-item.highlight {
+		border-color: var(--primary-color);
+		background: rgba(205, 213, 174, 0.05);
+	}
+
+	.schedule-item.shuttle {
+		border-color: var(--warning-color);
+		background: rgba(245, 158, 11, 0.05);
+	}
+
+	.schedule-date {
+		font-size: 0.875rem;
+		color: var(--accent-color);
+		margin-bottom: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.schedule-time {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: var(--primary-color);
+		margin-bottom: 0.5rem;
+	}
+
+
+	.schedule-event {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: var(--text-primary);
+		margin-bottom: 0.75rem;
+	}
+
+	.schedule-location {
+		font-size: 1rem;
+		color: var(--text-secondary);
+		line-height: 1.4;
+	}
+
+	.schedule-note {
+		font-size: 0.875rem;
+		color: var(--warning-color);
+		font-weight: 500;
+		margin-top: 0.5rem;
+		font-style: italic;
+	}
+
+	@media (max-width: 768px) {
+		.schedule-container {
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.schedule-item {
+			padding: 1.25rem;
+			min-width: auto;
+		}
+
+		.schedule-time {
+			font-size: 1.25rem;
+		}
+
+		.schedule-event {
+			font-size: 1.125rem;
+		}
+	}
+</style>

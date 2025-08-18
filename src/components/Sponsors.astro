@@ -1,0 +1,180 @@
+---
+import trailLogo from '../assets/Trail_Logo.webp';
+import guLogo from '../assets/GU_Logo.webp';
+import mtoLogo from '../assets/MTO_Trail_Logo.webp';
+import muddyLogo from '../assets/Muddy_Logo.webp';
+import ppLogo from '../assets/PP_Logo.webp';
+import salomonLogo from '../assets/Salomon_Logo.webp';
+
+// Ensure component is properly parsed
+const componentLoaded = true;
+---
+
+<section id="sponsors" class="section sponsors">
+	<div class="container">
+		<h2 class="section-title">Our Sponsors</h2>
+		<div class="sponsors-carousel">
+			<div class="sponsors-track">
+				<!-- First set of sponsors -->
+				<div class="sponsor-logo">
+					<a href="https://www.thebikeshop.co.za/" target="_blank" rel="noopener noreferrer">
+						<img src={trailLogo.src} alt="Trail Running Sponsor" />
+					</a>
+				</div>
+				<div class="sponsor-logo">
+					<a href="https://guenergy.co.za/" target="_blank" rel="noopener noreferrer">
+						<img src={guLogo.src} alt="GU Energy" />
+					</a>
+				</div>
+				<div class="sponsor-logo">
+					<a href="https://www.mtotrails.com/" target="_blank" rel="noopener noreferrer">
+						<img src={mtoLogo.src} alt="MTO Trail" />
+					</a>
+				</div>
+				<div class="sponsor-logo">
+					<a href="https://facebook.com/muddyfootadventures/" target="_blank" rel="noopener noreferrer">
+						<img src={muddyLogo.src} alt="Muddy Princess" />
+					</a>
+				</div>
+				<div class="sponsor-logo">
+					<a href="https://plettpixels.com/" target="_blank" rel="noopener noreferrer">
+						<img src={ppLogo.src} alt="PP Sponsor" />
+					</a>
+				</div>
+				<div class="sponsor-logo">
+					<a href="https://salomonsports.co.za/" target="_blank" rel="noopener noreferrer">
+						<img src={salomonLogo.src} alt="Salomon" />
+					</a>
+				</div>
+				
+				<!-- Duplicate set for seamless loop -->
+				<div class="sponsor-logo">
+					<a href="https://www.thebikeshop.co.za/" target="_blank" rel="noopener noreferrer">
+						<img src={trailLogo.src} alt="Trail Running Sponsor" />
+					</a>
+				</div>
+				<div class="sponsor-logo">
+					<a href="https://guenergy.co.za/" target="_blank" rel="noopener noreferrer">
+						<img src={guLogo.src} alt="GU Energy" />
+					</a>
+				</div>
+				<div class="sponsor-logo">
+					<a href="https://www.mtotrails.com/" target="_blank" rel="noopener noreferrer">
+						<img src={mtoLogo.src} alt="MTO Trail" />
+					</a>
+				</div>
+				<div class="sponsor-logo">
+					<a href="https://facebook.com/muddyfootadventures/" target="_blank" rel="noopener noreferrer">
+						<img src={muddyLogo.src} alt="Muddy Princess" />
+					</a>
+				</div>
+				<div class="sponsor-logo">
+					<a href="https://plettpixels.com/" target="_blank" rel="noopener noreferrer">
+						<img src={ppLogo.src} alt="PP Sponsor" />
+					</a>
+				</div>
+				<div class="sponsor-logo">
+					<a href="https://salomonsports.co.za/" target="_blank" rel="noopener noreferrer">
+						<img src={salomonLogo.src} alt="Salomon" />
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.sponsors {
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, var(--background-color) 100%);
+		overflow: hidden;
+	}
+
+	.sponsors-carousel {
+		width: 100%;
+		overflow: hidden;
+		position: relative;
+		background: rgba(255, 255, 255, 0.02);
+		border-radius: 12px;
+		padding: 2rem 0;
+	}
+
+	.sponsors-track {
+		display: flex;
+		align-items: center;
+		animation: scroll 30s linear infinite;
+		width: calc(250px * 12 + 3rem * 12); /* 12 logos with gaps */
+	}
+
+	.sponsor-logo {
+		flex-shrink: 0;
+		width: 250px;
+		height: 120px;
+		margin-right: 3rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(255, 255, 255, 0.9);
+		border-radius: 8px;
+		padding: 0.5rem;
+		transition: transform 0.3s ease;
+	}
+
+	.sponsor-logo:hover {
+		transform: scale(1.05);
+	}
+
+	.sponsor-logo a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+	}
+	.sponsor-logo img {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+		filter: grayscale(100%);
+		transition: filter 0.3s ease;
+	}
+
+	.sponsor-logo:hover img {
+		filter: grayscale(0%);
+	}
+
+	@keyframes scroll {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(calc(-250px * 6 - 3rem * 6)); /* Move by width of 6 logos */
+		}
+	}
+
+	/* Pause animation on hover */
+	.sponsors-carousel:hover .sponsors-track {
+		animation-play-state: paused;
+	}
+
+	@media (max-width: 768px) {
+		.sponsor-logo {
+			width: 180px;
+			height: 90px;
+			margin-right: 2rem;
+			padding: 0.25rem;
+		}
+
+		.sponsors-track {
+			width: calc(180px * 12 + 2rem * 12);
+		}
+
+		@keyframes scroll {
+			0% {
+				transform: translateX(0);
+			}
+			100% {
+				transform: translateX(calc(-180px * 6 - 2rem * 6));
+			}
+		}
+	}
+</style>

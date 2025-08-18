@@ -1,0 +1,227 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Route from '../components/Route.astro';
+import Sponsors from '../components/Sponsors.astro';
+import FAQ from '../components/FAQ.astro';
+import Video from '../components/Video.astro';
+import Gallery from '../components/Gallery.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Tsitsikamma Ultra 2025 - Premier 100km Trail Run | Register Now">
+	<Header />
+	<main>
+		<Hero />
+		<Video />
+		<About />
+		<Gallery />
+		<Route />
+		<Sponsors />
+		<FAQ />
+	</main>
+	<section class="section cta-section">
+		<div class="container">
+			<div class="cta-content">
+				<div class="cta-left">
+					<h2 class="cta-title">Ready to Conquer the Tsitsikamma Mountains?</h2>
+					<p class="cta-subtitle">Grab Your Ticket Now and Join the Epic Trail Challenge!</p>
+					<a href="https://www.entryninja.com/events/82604-50km-trail-race" class="btn btn-primary cta-button" target="_blank">Enter Race</a>
+				</div>
+				<div class="cta-right">
+					<p class="excuse-text">Not ready for Ultra? Use our handy excuse generator to let your friends down easily</p>
+					<div class="excuse-output" id="excuseOutput"></div>
+					<button class="btn btn-outline excuse-button" id="excuseGenerator">Generate Excuse</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<Footer />
+</Layout>
+
+<style>
+	main {
+		padding-top: 80px; /* Account for fixed header */
+	}
+
+	@media (max-width: 768px) {
+		main {
+			padding-top: 70px;
+		}
+	}
+</style>
+<script>
+	// Excuse Generator
+	const excuses = [
+		"My GPS watch is updating its firmware that day",
+		"I need to wash my hair... for 12 hours straight",
+		"My running shoes are in a committed relationship with my couch",
+		"I'm allergic to mountains on weekends",
+		"My legs are on strike until further notice",
+		"I have a very important Netflix series to binge",
+		"My doctor says I'm allergic to early morning starts",
+		"I'm saving my energy for the zombie apocalypse",
+		"My trail running app crashed and took my motivation with it",
+		"I promised my bed I'd spend quality time together",
+		"I'm in training to become a professional couch potato",
+		"My running playlist is having an existential crisis",
+		"I need to stay home and guard my snacks from burglars",
+		"I'm participating in a very competitive sleeping tournament",
+		"My running shorts are in the witness protection program"
+	];
+
+	function generateExcuse() {
+		const randomIndex = Math.floor(Math.random() * excuses.length);
+		const excuse = excuses[randomIndex];
+		const output = document.getElementById('excuseOutput');
+		
+		if (output) {
+			output.textContent = `"${excuse}"`;
+			output.style.opacity = '0';
+			
+			// Fade in animation
+			setTimeout(() => {
+				output.style.opacity = '1';
+			}, 100);
+		}
+	}
+
+	// Initialize excuse generator
+	function initExcuseGenerator() {
+		const button = document.getElementById('excuseGenerator');
+		if (button) {
+			button.addEventListener('click', generateExcuse);
+		}
+	}
+
+	// Initialize excuse generator when DOM is loaded
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initExcuseGenerator);
+	} else {
+		initExcuseGenerator();
+	}
+</script>
+
+<style>
+	.cta-section {
+		background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+		color: var(--background-color);
+		margin-top: 4rem;
+	}
+
+	.cta-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+		align-items: center;
+	}
+
+	.cta-left {
+		text-align: left;
+	}
+
+	.cta-title {
+		font-size: 2.5rem;
+		color: var(--background-color);
+		margin-bottom: 1rem;
+		line-height: 1.2;
+	}
+
+	.cta-subtitle {
+		font-size: 1.25rem;
+		color: var(--background-color);
+		margin-bottom: 2rem;
+		opacity: 0.9;
+	}
+
+	.cta-button {
+		background-color: var(--background-color);
+		color: var(--primary-color);
+		border: 2px solid var(--background-color);
+		font-size: 1.125rem;
+		padding: 1.25rem 2.5rem;
+	}
+
+	.cta-button:hover {
+		background-color: transparent;
+		color: var(--background-color);
+		border-color: var(--background-color);
+	}
+
+	.cta-right {
+		text-align: center;
+		background: #FEF3C7;
+		border-radius: 12px;
+		padding: 2rem;
+		border: 2px solid #F59E0B;
+		position: relative;
+		box-shadow: 0 2px 4px rgba(245, 158, 11, 0.1);
+	}
+
+	.excuse-text {
+		font-size: 1.125rem;
+		color: #92400E;
+		margin-bottom: 1.5rem;
+		opacity: 1;
+		font-weight: 600;
+	}
+
+	.excuse-button {
+		background: #F59E0B;
+		color: #FFFFFF;
+		border: 2px solid #F59E0B;
+		margin-top: 1.5rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		transition: all 0.3s ease;
+		box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
+	}
+
+	.excuse-button:hover {
+		background: #D97706;
+		color: #FFFFFF;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 8px rgba(245, 158, 11, 0.3);
+	}
+
+	.excuse-output {
+		display: none;
+		background: #FEF3C7;
+		border-radius: 8px;
+		padding: 1rem;
+		font-style: italic;
+		font-size: 1.125rem;
+		color: #92400E;
+		transition: opacity 0.3s ease;
+		min-height: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		border: 1px solid #F59E0B;
+		font-weight: 500;
+	}
+
+	@media (max-width: 768px) {
+		.cta-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+			text-align: center;
+		}
+
+		.cta-left {
+			text-align: center;
+		}
+
+		.cta-title {
+			font-size: 2rem;
+		}
+
+		.cta-subtitle {
+			font-size: 1.125rem;
+		}
+	}
+</style>

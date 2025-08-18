@@ -1,0 +1,92 @@
+---
+import aboutImage from '../assets/About-Image_Tiny.webp';
+---
+
+<section id="about" class="section about">
+	<div class="container">
+		<h2 class="section-title">About the Race</h2>
+		<div class="about-content">
+			<div class="about-text">
+				<div class="card">
+					<h3 class="card-title">The Ultimate Trail Experience</h3>
+					<p class="card-text">
+						The Tsitsikamma Ultra is a challenging 50km trail run that takes you through some of South Africa's most spectacular indigenous forests, coastal paths, and mountain trails. This is not just a race—it's an adventure that will test your limits while showcasing the breathtaking beauty of the Garden Route.
+					</p>
+					<p class="card-text">
+						Starting at Storms River Petropoort, the route winds through ancient forests, crosses streams, and offers stunning mountain vistas before finishing at Covie. With a total elevation gain of 2,500m, this ultra demands respect, preparation, and determination.
+					</p>
+				</div>
+			</div>
+			<div class="about-image-container">
+				<div class="card image-card">
+					<img src={aboutImage.src} alt="Tsitsikamma Ultra trail running" class="about-image" />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.about {
+		background: linear-gradient(180deg, var(--background-color) 0%, rgba(34, 51, 59, 0.8) 100%);
+	}
+
+	.about-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+		align-items: stretch;
+	}
+
+	.about-text {
+		display: flex;
+	}
+
+	.about-image-container {
+		display: flex;
+	}
+
+	.about-text .card,
+	.about-image-container .card {
+		height: 100%;
+		flex: 1;
+	}
+
+	.card-title {
+		font-size: 1.5rem;
+		color: var(--primary-color);
+		margin-bottom: 1rem;
+	}
+
+	.card-text {
+		color: var(--text-secondary);
+		margin-bottom: 1.5rem;
+	}
+
+	.card-text:last-child {
+		margin-bottom: 0;
+	}
+
+	.image-card {
+		padding: 0;
+		overflow: hidden;
+	}
+
+	.about-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.about-image:hover {
+		transform: scale(1.05);
+	}
+
+	@media (max-width: 768px) {
+		.about-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+	}
+</style>

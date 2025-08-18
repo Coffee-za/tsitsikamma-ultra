@@ -1,0 +1,131 @@
+---
+import elevationGraph from '../assets/Route_Elevation.svg';
+import rulerIcon from '../assets/ruler.svg';
+import mountainsIcon from '../assets/mountains.svg';
+import timerIcon from '../assets/timer.svg';
+import hamburgerIcon from '../assets/hamburger.svg';
+---
+
+<section id="route" class="section route">
+	<div class="container">
+		<h2 class="section-title">The Route</h2>
+		<div class="elevation-chart-container card">
+			<h3>Elevation Profile</h3>
+			<img src={elevationGraph.src} alt="Tsitsikamma Ultra Elevation Profile" class="elevation-image" />
+			<div class="chart-info">
+				<div class="chart-stat">
+					<div class="stat-icon">
+						<img src={rulerIcon.src} alt="Distance" />
+					</div>
+					<span class="stat-value">Distance</span>
+					<span class="stat-desc">50km</span>
+				</div>
+				<div class="chart-stat">
+					<div class="stat-icon">
+						<img src={mountainsIcon.src} alt="Elevation" />
+					</div>
+					<span class="stat-value">Elevation Gain</span>
+					<span class="stat-desc">2,500m</span>
+				</div>
+				<div class="chart-stat">
+					<div class="stat-icon">
+						<img src={timerIcon.src} alt="Cut-off Time" />
+					</div>
+					<span class="stat-value">Cut-off Time</span>
+					<span class="stat-desc">12 hours</span>
+				</div>
+				<div class="chart-stat">
+					<div class="stat-icon">
+						<img src={hamburgerIcon.src} alt="Aid Stations" />
+					</div>
+					<span class="stat-value">Aid Stations</span>
+					<span class="stat-desc">2</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.route {
+		background: rgba(255, 255, 255, 0.02);
+	}
+
+	.elevation-chart-container {
+		position: relative;
+		width: 100%;
+	}
+
+	.elevation-chart-container h3 {
+		color: var(--primary-color);
+		margin-bottom: 1rem;
+		font-size: 1.5rem;
+	}
+
+	.elevation-image {
+		width: 100%;
+		height: auto;
+		border-radius: 12px;
+	}
+
+	.chart-info {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin-top: 1rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--border-color);
+	}
+
+	.chart-stat {
+		text-align: center;
+		flex: 1;
+		min-width: 120px;
+	}
+
+	.stat-icon {
+		width: 24px;
+		height: 24px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 0.5rem;
+		margin: 0 auto 0.5rem auto;
+	}
+
+	.stat-icon img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		filter: brightness(0) saturate(100%) invert(85%) sepia(12%) saturate(1234%) hue-rotate(38deg) brightness(95%) contrast(89%);
+	}
+
+	.stat-value {
+		display: block;
+		font-size: 1.2rem;
+		font-weight: 400;
+		color: var(--primary-color);
+	}
+
+	.stat-desc {
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: #E8871E;
+	}
+
+	@media (max-width: 640px) {
+		.elevation-image {
+			height: 250px;
+		}
+
+		.chart-info {
+			justify-content: center;
+		}
+
+		.chart-stat {
+			min-width: 100px;
+			margin-bottom: 1rem;
+		}
+	}
+</style>

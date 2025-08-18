@@ -1,0 +1,145 @@
+---
+import logoImage from '../assets/Ultra_Logo_White_Cropped.webp';
+---
+
+<section class="hero">
+	<div class="container">
+		<div class="hero-content">
+			<div class="hero-logo">
+				<img src={logoImage.src} alt="Tsitsikamma Ultra" class="logo" />
+			</div>
+			<h1 class="hero-title">Entries Now Open</h1>
+			<p class="hero-subtitle">Run Like The Trees Are Cheering</p>
+			<p class="hero-date">2026.08.29</p>
+			<div class="hero-actions">
+				<a href="https://www.entryninja.com/events/82604-50km-trail-race" class="btn btn-primary" target="_blank">Enter Now</a>
+				<a href="#about" class="btn btn-outline">Learn More</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		position: relative;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-image: url('/Hero_Banner_webp.webp');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+
+	.hero::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 1;
+	}
+
+	.hero-content {
+		position: relative;
+		text-align: center;
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 2rem;
+		z-index: 2;
+	}
+
+	.hero-logo {
+		margin-bottom: 2rem;
+		animation: fadeInUp 1s ease-out;
+	}
+
+	.hero-logo .logo {
+		max-width: 300px;
+		height: auto;
+		filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+	}
+
+	.hero-title {
+		font-size: 3.5rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		color: #FFFFFF;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+		animation: fadeInUp 1s ease-out 0.2s both;
+	}
+
+	.hero-subtitle {
+		font-size: 1.5rem;
+		font-weight: 400;
+		margin-bottom: 1rem;
+		color: var(--primary-color);
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+		animation: fadeInUp 1s ease-out 0.3s both;
+	}
+
+	.hero-date {
+		font-size: 1.125rem;
+		font-weight: 700;
+		font-family: 'EB Garamond', serif;
+		margin-bottom: 2rem;
+		color: #FFFFFF;
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+		animation: fadeInUp 1s ease-out 0.35s both;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+		animation: fadeInUp 1s ease-out 0.4s both;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			background-attachment: scroll;
+		}
+
+		.hero-logo .logo {
+			max-width: 250px;
+		}
+
+		.hero-title {
+			font-size: 2.25rem;
+		}
+
+		.hero-subtitle {
+			font-size: 1.25rem;
+		}
+
+		.hero-date {
+			font-size: 1rem;
+		}
+
+		.hero-actions {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.btn {
+			width: 100%;
+			max-width: 300px;
+		}
+	}
+</style>

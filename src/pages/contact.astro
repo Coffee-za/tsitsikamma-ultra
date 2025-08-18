@@ -1,0 +1,266 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Contact Us - Tsitsikamma Ultra 2025">
+	<Header />
+	<main>
+		<section class="hero-section">
+			<div class="container">
+				<h1 class="page-title">Contact Us</h1>
+				<p class="page-subtitle">Get in touch with us for any questions about the race</p>
+			</div>
+		</section>
+
+		<section class="section contact-section">
+			<div class="container">
+				<div class="contact-grid">
+					<!-- Contact Form -->
+					<div class="contact-form-container">
+						<div class="card">
+							<h2 class="card-title">Send us a Message</h2>
+							<form class="contact-form" action="mailto:wolf@wldr.co.za" method="post" enctype="text/plain">
+								<div class="form-group">
+									<label for="name">Name *</label>
+									<input type="text" id="name" name="name" required>
+								</div>
+								
+								<div class="form-group">
+									<label for="email">Email *</label>
+									<input type="email" id="email" name="email" required>
+								</div>
+								
+								<div class="form-group">
+									<label for="phone">Phone Number</label>
+									<input type="tel" id="phone" name="phone">
+								</div>
+								
+								<div class="form-group">
+									<label for="message">Message *</label>
+									<textarea id="message" name="message" rows="5" required placeholder="Tell us how we can help you..."></textarea>
+								</div>
+								
+								<button type="submit" class="btn btn-primary submit-btn">Send Message</button>
+							</form>
+						</div>
+					</div>
+
+					<!-- Social Media Card -->
+					<div class="social-card">
+						<div class="card">
+							<h3 class="card-title">Follow Us</h3>
+							<p class="card-text">Stay connected for the latest race updates and trail running inspiration</p>
+							
+							<div class="social-links">
+								<a href="https://web.facebook.com/profile.php?id=61577864094225" class="social-link facebook" target="_blank" rel="noopener noreferrer">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+										<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+									</svg>
+									<span>Facebook</span>
+								</a>
+								
+								<a href="https://www.instagram.com/tsitsikamma_ultra" class="social-link instagram" target="_blank" rel="noopener noreferrer">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+										<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+									</svg>
+									<span>Instagram</span>
+								</a>
+								
+								<a href="https://strava.app.link/REM2bU9UOVb" class="social-link strava" target="_blank" rel="noopener noreferrer">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+										<path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.917"/>
+									</svg>
+									<span>Strava</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Strava Club Card -->
+					<div class="strava-club-card">
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	main {
+		padding-top: 80px;
+	}
+
+	.hero-section {
+		background: linear-gradient(135deg, var(--background-color) 0%, rgba(34, 51, 59, 0.8) 100%);
+		padding: 4rem 0;
+		text-align: center;
+	}
+
+	.page-title {
+		font-size: 3rem;
+		color: var(--primary-color);
+		margin-bottom: 1rem;
+	}
+
+	.page-subtitle {
+		font-size: 1.25rem;
+		color: var(--text-secondary);
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.contact-section {
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, var(--background-color) 100%);
+	}
+
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 1fr 400px;
+		gap: 2rem;
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.contact-form-container {
+		/* Contact form takes left column */
+	}
+
+	.cards-column {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.card-title {
+		font-size: 1.5rem;
+		color: var(--primary-color);
+		margin-bottom: 1.5rem;
+	}
+
+	.card-text {
+		color: var(--text-secondary);
+		margin-bottom: 1.5rem;
+		line-height: 1.6;
+	}
+
+	/* Contact Form Styles */
+	.contact-form {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
+	}
+
+	.form-group {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.form-group:nth-child(4) {
+		grid-column: 1 / -1;
+	}
+
+	.form-group:nth-child(5) {
+		grid-column: 1 / -1;
+	}
+
+	.form-group label {
+		margin-bottom: 0.5rem;
+		font-weight: 500;
+		color: var(--text-primary);
+	}
+
+	.form-group input,
+	.form-group textarea {
+		padding: 0.75rem;
+		border: 2px solid var(--border-color);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.05);
+		color: var(--text-primary);
+		font-size: 1rem;
+		transition: all 0.3s ease;
+	}
+
+	.form-group input:focus,
+	.form-group textarea:focus {
+		outline: none;
+		border-color: var(--primary-color);
+		box-shadow: 0 0 0 3px rgba(205, 213, 174, 0.1);
+	}
+
+	.form-group textarea {
+		resize: vertical;
+		min-height: 120px;
+	}
+
+	.submit-btn {
+		grid-column: 1 / -1;
+		justify-self: start;
+		min-width: 200px;
+	}
+
+	/* Social Media Styles */
+	.social-links {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.social-link {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem;
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid var(--border-color);
+		border-radius: 8px;
+		text-decoration: none;
+		color: var(--text-secondary);
+		transition: all 0.3s ease;
+	}
+
+	.social-link:hover {
+		transform: translateY(-2px);
+		border-color: var(--primary-color);
+		background: rgba(205, 213, 174, 0.1);
+	}
+
+	.social-link.facebook:hover {
+		color: #1877f2;
+		border-color: #1877f2;
+	}
+
+	.social-link.instagram:hover {
+		color: #e4405f;
+		border-color: #e4405f;
+	}
+
+	.social-link.strava:hover {
+		color: #fc4c02;
+		border-color: #fc4c02;
+	}
+
+	/* Strava Club Styles */
+
+	@media (max-width: 768px) {
+		main {
+			padding-top: 70px;
+		}
+
+		.page-title {
+			font-size: 2.25rem;
+		}
+
+		.page-subtitle {
+			font-size: 1.125rem;
+		}
+
+		.contact-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.cards-column {
+			gap: 1.5rem;
+		}
+	}
+</style>
