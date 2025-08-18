@@ -11,7 +11,9 @@ import hamburgerIcon from '../assets/hamburger.svg';
 		<h2 class="section-title">The Route</h2>
 		<div class="elevation-chart-container card">
 			<h3>Elevation Profile</h3>
-			<img src={elevationGraph.src} alt="Tsitsikamma Ultra Elevation Profile" class="elevation-image" />
+			<div class="elevation-scroll">
+				<img src={elevationGraph.src} alt="Tsitsikamma Ultra Elevation Profile" class="elevation-image" />
+			</div>
 			<div class="chart-info">
 				<div class="chart-stat">
 					<div class="stat-icon">
@@ -68,6 +70,12 @@ import hamburgerIcon from '../assets/hamburger.svg';
 		border-radius: 12px;
 	}
 
+	/* Horizontal scroll wrapper for mobile */
+	.elevation-scroll {
+		width: 100%;
+		overflow: hidden;
+	}
+
 	.chart-info {
 		display: flex;
 		justify-content: space-between;
@@ -115,8 +123,19 @@ import hamburgerIcon from '../assets/hamburger.svg';
 	}
 
 	@media (max-width: 640px) {
+		.elevation-scroll {
+			overflow-x: auto;
+			overflow-y: hidden;
+			-webkit-overflow-scrolling: touch;
+			/* Prevent side gaps from hidden scrollbars */
+			margin: 0 -0.5rem;
+			padding: 0 0.5rem;
+		}
+
 		.elevation-image {
-			height: 250px;
+			height: 320px; /* bigger on mobile */
+			width: auto;  /* maintain aspect */
+			display: block;
 		}
 
 		.chart-info {

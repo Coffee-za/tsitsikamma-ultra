@@ -57,6 +57,8 @@ const galleryImages = [
 		align-items: stretch;
 	}
 
+	/* Mobile carousel styles are defined in the media query below */
+
 	.gallery-item {
 		position: relative;
 		flex: 1;
@@ -112,15 +114,19 @@ const galleryImages = [
 		}
 
 		.gallery-grid {
-			flex-wrap: wrap;
+			flex-wrap: nowrap;
 			gap: 1rem;
-			justify-content: center;
+			overflow: hidden; /* hide scrollbar for continuous slideshow */
+			/* disable scroll snap; continuous animation via JS */
 		}
+		.gallery-grid::-webkit-scrollbar { display: none; } /* webkit */
 
 		.gallery-item {
-			flex: 0 1 calc(50% - 0.5rem);
-			max-width: 200px;
+			flex: 0 0 80%;
+			max-width: none;
+			/* scroll-snap removed for continuous motion */
 		}
+
 	}
 
 	@media (max-width: 480px) {
@@ -128,16 +134,71 @@ const galleryImages = [
 			padding: 2rem 0;
 		}
 
-		.gallery-grid {
-			flex-direction: column;
-			align-items: center;
-			gap: 1rem;
-		}
-
-		.gallery-item {
-			flex: none;
-			width: 100%;
-			max-width: 250px;
-		}
+		.gallery-item { flex-basis: 85%; }
 	}
 </style>
+
+<script>
+	// @ts-nocheck
+	function initGalleryCarousel() {
+		const gridEl = document.querySelector('.gallery .gallery-grid');
+		if (!(gridEl instanceof HTMLElement)) return;
+		let items = Array.from(gridEl.querySelectorAll('.gallery-item'));
+		if (items.length === 0) return;
+
+		const getGapPX = () => parseFloat(getComputedStyle(gridEl).gap || '0px');
+
+		const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+		const atEnd = () => gridEl.scrollLeft + gridEl.clientWidth >= gridEl.scrollWidth - 4;
+
+		// Continuous slow auto-scroll on mobile using rAF
+		let rafId;
+		const pixelsPerSecond = 30; // slow
+		let lastTs = 0;
+
+		const scrollLeftByItem = () => {
+			const firstItem = items[0];
+			const itemWidth = firstItem.getBoundingClientRect().width + getGapPX();
+			gridEl.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+		};
+
+		const scrollRightByItem = () => {
+			const firstItem = items[0];
+			const itemWidth = firstItem.getBoundingClientRect().width + getGapPX();
+			gridEl.scrollBy({ left: itemWidth, behavior: 'smooth' });
+		};
+
+		function step(ts) {
+			if (!isMobile()) {
+				lastTs = ts;
+				rafId = requestAnimationFrame(step);
+				return;
+			}
+			const dt = lastTs ? (ts - lastTs) / 1000 : 0;
+			lastTs = ts;
+			const dx = pixelsPerSecond * dt;
+			const nextLeft = gridEl.scrollLeft + dx;
+			if (nextLeft + gridEl.clientWidth >= gridEl.scrollWidth - 1) {
+				gridEl.scrollLeft = 0; // loop to start
+			} else {
+				gridEl.scrollLeft = nextLeft;
+			}
+			rafId = requestAnimationFrame(step);
+		}
+
+		function startAuto() {
+			if (rafId) cancelAnimationFrame(rafId);
+			lastTs = 0;
+			rafId = requestAnimationFrame(step);
+		}
+
+		window.addEventListener('resize', () => { startAuto(); });
+		startAuto();
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initGalleryCarousel);
+	} else {
+		initGalleryCarousel();
+	}
+</script>

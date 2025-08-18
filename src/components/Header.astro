@@ -40,6 +40,9 @@ import logoImage from '../assets/Ultra_Logo_White_Cropped.webp';
 		const header = document.querySelector('.header');
 		
 		if (!mobileMenuToggle || !mobileMenu || !header) return;
+
+		// Set initial accessibility state
+		mobileMenuToggle.setAttribute('aria-expanded', 'false');
 		
 		mobileMenuToggle.addEventListener('click', () => {
 			const isOpen = mobileMenu.classList.contains('active');
@@ -48,10 +51,12 @@ import logoImage from '../assets/Ultra_Logo_White_Cropped.webp';
 				mobileMenu.classList.remove('active');
 				mobileMenuToggle.classList.remove('active');
 				header.classList.remove('menu-open');
+				mobileMenuToggle.setAttribute('aria-expanded', 'false');
 			} else {
 				mobileMenu.classList.add('active');
 				mobileMenuToggle.classList.add('active');
 				header.classList.add('menu-open');
+				mobileMenuToggle.setAttribute('aria-expanded', 'true');
 			}
 		});
 		
@@ -62,6 +67,7 @@ import logoImage from '../assets/Ultra_Logo_White_Cropped.webp';
 				mobileMenu.classList.remove('active');
 				mobileMenuToggle.classList.remove('active');
 				header.classList.remove('menu-open');
+				mobileMenuToggle.setAttribute('aria-expanded', 'false');
 			});
 		});
 	}
@@ -173,12 +179,15 @@ import logoImage from '../assets/Ultra_Logo_White_Cropped.webp';
 		border-bottom: 1px solid var(--border-color);
 		transform: translateY(-100%);
 		opacity: 0;
+		pointer-events: none; /* Prevent invisible menu from blocking clicks */
+		z-index: 1001; /* Ensure it overlays content when open */
 		transition: all 0.3s ease;
 	}
 
 	.mobile-menu.active {
 		transform: translateY(0);
 		opacity: 1;
+		pointer-events: auto;
 	}
 
 	.mobile-nav-links {
@@ -214,7 +223,8 @@ import logoImage from '../assets/Ultra_Logo_White_Cropped.webp';
 
 	.mobile-nav-links .btn {
 		margin: 0 1rem;
-		display: inline-flex;
+		display: block;
+		width: auto; /* full width minus horizontal margins */
 	}
 	@media (max-width: 768px) {
 		.nav-links {
