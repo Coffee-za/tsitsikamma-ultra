@@ -1,23 +1,57 @@
 ---
 export interface Props {
 	title: string;
+	description?: string;
+	image?: string; // path under /public or absolute URL
+	noindex?: boolean;
+	ogType?: string; // website, article, etc.
 }
 
-const { title } = Astro.props;
+const { title, description, image, noindex, ogType } = Astro.props;
+const metaDescription = description ?? "Tsitsikamma Ultra - Premier trail running event through South Africa's stunning Garden Route. Register now for an unforgettable ultra running experience.";
+const robots = noindex ? 'noindex, nofollow' : 'index, follow';
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
+const ogImageUrl = Astro.site ? new URL(image ?? '/Guide_Hero_Collage.webp', Astro.site) : null;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Tsitsikamma Ultra - Premier trail running event through South Africa's stunning Garden Route. Register now for an unforgettable ultra running experience." />
+		<meta name="description" content={metaDescription} />
+		<meta name="robots" content={robots} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		{canonicalUrl && (
+			<link rel="canonical" href={canonicalUrl.href} />
+		)}
+
+		<!-- Open Graph -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={metaDescription} />
+		{canonicalUrl && (
+			<meta property="og:url" content={canonicalUrl.href} />
+		)}
+		<meta property="og:type" content={ogType ?? 'website'} />
+		{ogImageUrl && (
+			<meta property="og:image" content={ogImageUrl.href} />
+		)}
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={metaDescription} />
+		{ogImageUrl && (
+			<meta name="twitter:image" content={ogImageUrl.href} />
+		)}
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+		{import.meta.env.PROD && (
+			<script defer src="https://analytics.plettpixels.com/script.js" data-website-id="cbc06780-929f-42aa-bea3-d72c61381511"></script>
+		)}
 	</head>
 	<body>
 		<slot />
