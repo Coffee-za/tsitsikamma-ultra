@@ -67,9 +67,27 @@ import Footer from '../components/Footer.astro';
 		"Theres no Wi-Fi on the route. "
 	];
 
+	// Shuffle and cycle through excuses without repeats
+	function getShuffledExcuses() {
+		const arr = [...excuses];
+		for (let i = arr.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[arr[i], arr[j]] = [arr[j], arr[i]];
+		}
+		return arr;
+	}
+
+	let excuseQueue = getShuffledExcuses();
+
+	function getNextExcuse() {
+		if (excuseQueue.length === 0) {
+			excuseQueue = getShuffledExcuses();
+		}
+		return excuseQueue.pop();
+	}
+
 	function generateExcuse() {
-		const randomIndex = Math.floor(Math.random() * excuses.length);
-		const excuse = excuses[randomIndex];
+		const excuse = getNextExcuse();
 		const output = document.getElementById('excuseOutput');
 		
 		if (output) {
