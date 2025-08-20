@@ -9,10 +9,21 @@ import Footer from '../components/Footer.astro';
 	<main>
 		<section class="section">
 			<div class="container">
-				<h1 class="section-title">Thank you!</h1>
-				<p>Your message has been sent. We'll get back to you soon.</p>
+				<h1 class="section-title thank-you-h1">Thank you!</h1>
+				<p class="success-text-p">Your message has been sent. We'll get back to you soon.</p>
 			</div>
 		</section>
 	</main>
 	<Footer />
 </Layout>
+
+<style>
+
+.success-text-p {
+	text-align: center;
+}
+
+.thank-you-h1 {
+	margin-top: 3rem;
+}
+</style>

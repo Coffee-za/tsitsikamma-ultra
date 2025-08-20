@@ -8,7 +8,13 @@ export default defineConfig({
 	site: 'https://tsitsikammaultra.co.za',
 	integrations: [
 		sitemap({
-			filter: (page) => !['/404', '/success'].includes(page),
+			filter: (page) => {
+				const value = String(page);
+				const pathname = value.startsWith('http') ? new URL(value).pathname : value;
+				if (['/404', '/404/', '/success', '/success/'].includes(pathname)) return false;
+				if (pathname.endsWith('/tsitsikamma-ultra-2026.gpx')) return false;
+				return true;
+			},
 		}),
 	],
 });

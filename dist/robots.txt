@@ -1,5 +1,6 @@
 # Robots.txt for Tsitsikamma Ultra
 User-agent: *
 Allow: /
+Disallow: /tsitsikamma-ultra-2026.gpx
 
-Sitemap: https://www.tsitsikammaultra.co.za/sitemap-index.xml
+Sitemap: https://tsitsikammaultra.co.za/sitemap-index.xml
