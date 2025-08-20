@@ -11,7 +11,7 @@ const { title, description, image, noindex, ogType } = Astro.props;
 const metaDescription = description ?? "Tsitsikamma Ultra - Premier trail running event through South Africa's stunning Garden Route. Register now for an unforgettable ultra running experience.";
 const robots = noindex ? 'noindex, nofollow' : 'index, follow';
 const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
-const ogImageUrl = Astro.site ? new URL(image ?? '/Guide_Hero_Collage.webp', Astro.site) : null;
+const ogImageUrl = Astro.site ? new URL(image ?? '/Hero Banner_webp.webp', Astro.site) : null;
 ---
 
 <!doctype html>
