@@ -49,6 +49,19 @@ const ogImageUrl = Astro.site ? new URL(image ?? '/Hero Banner_webp.webp', Astro
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+		<style>
+			/* Opt-in to faster text rendering while fonts load */
+			@font-face {
+				font-family: 'Inter';
+				font-display: swap;
+				src: local('Inter');
+			}
+			@font-face {
+				font-family: 'EB Garamond';
+				font-display: swap;
+				src: local('EB Garamond');
+			}
+		</style>
 		{import.meta.env.PROD && (
 			<script defer src="https://analytics.plettpixels.com/script.js" data-website-id="cbc06780-929f-42aa-bea3-d72c61381511"></script>
 		)}
@@ -85,7 +98,7 @@ const ogImageUrl = Astro.site ? new URL(image ?? '/Hero Banner_webp.webp', Astro
 		padding: 0;
 		width: 100%;
 		min-height: 100vh;
-		font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+		font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 		line-height: 1.6;
 		background-color: var(--background-color);
 		color: var(--text-primary);
@@ -93,7 +106,7 @@ const ogImageUrl = Astro.site ? new URL(image ?? '/Hero Banner_webp.webp', Astro
 
 	h1, h2, h3, h4, h5, h6 {
 		margin: 0;
-		font-family: 'EB Garamond', serif !important;
+		font-family: 'EB Garamond', Georgia, 'Times New Roman', serif !important;
 		font-weight: 600 !important;
 		line-height: 1.2;
 	}
