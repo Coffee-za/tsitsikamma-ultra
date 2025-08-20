@@ -1,0 +1,5 @@
+# Robots.txt for Tsitsikamma Ultra
+User-agent: *
+Allow: /
+
+Sitemap: https://www.tsitsikammaultra.co.za/sitemap-index.xml

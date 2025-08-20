@@ -6,5 +6,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
 	// Replace with your live domain, including protocol, no trailing slash
 	site: 'https://www.tsitsikammaultra.co.za',
-	integrations: [sitemap()],
+	integrations: [
+		sitemap({
+			filter: (page) => !['/404', '/success'].includes(page),
+		}),
+	],
 });

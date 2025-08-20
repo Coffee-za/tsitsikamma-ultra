@@ -21,7 +21,12 @@ import Footer from '../components/Footer.astro';
 					<div class="contact-form-container">
 						<div class="card">
 							<h2 class="card-title">Send us a Message</h2>
-							<form class="contact-form" action="mailto:wolf@wldr.co.za" method="post" enctype="text/plain">
+							<form name="contact" class="contact-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success">
+								<!-- Netlify form metadata -->
+								<input type="hidden" name="form-name" value="contact">
+								<p style="display:none;">
+									<label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+								</p>
 								<div class="form-group">
 									<label for="name">Name *</label>
 									<input type="text" id="name" name="name" required>
