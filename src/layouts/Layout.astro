@@ -46,11 +46,21 @@ const ogImageUrl = Astro.site ? new URL(image ?? '/Hero Banner_webp.webp', Astro
 		{ogImageUrl && (
 			<meta name="twitter:image" content={ogImageUrl.href} />
 		)}
+
+		<!-- Font Performance Optimizations -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		
+		<!-- Preload critical font files -->
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" as="style">
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&display=swap" as="style">
+		
+		<!-- Load fonts with display=swap for better performance -->
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+		
+		<!-- Font loading optimization styles -->
 		<style>
-			/* Opt-in to faster text rendering while fonts load */
+			/* Font loading optimization */
 			@font-face {
 				font-family: 'Inter';
 				font-display: swap;
@@ -61,7 +71,20 @@ const ogImageUrl = Astro.site ? new URL(image ?? '/Hero Banner_webp.webp', Astro
 				font-display: swap;
 				src: local('EB Garamond');
 			}
+			
+			/* Prevent layout shift during font loading */
+			.font-loading {
+				font-display: swap;
+			}
+			
+			/* Optimize font rendering */
+			body {
+				text-rendering: optimizeSpeed;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
 		</style>
+
 		{import.meta.env.PROD && (
 			<script defer src="https://analytics.plettpixels.com/script.js" data-website-id="cbc06780-929f-42aa-bea3-d72c61381511"></script>
 		)}
@@ -102,6 +125,8 @@ const ogImageUrl = Astro.site ? new URL(image ?? '/Hero Banner_webp.webp', Astro
 		line-height: 1.6;
 		background-color: var(--background-color);
 		color: var(--text-primary);
+		/* Font loading optimization */
+		font-display: swap;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -109,6 +134,8 @@ const ogImageUrl = Astro.site ? new URL(image ?? '/Hero Banner_webp.webp', Astro
 		font-family: 'EB Garamond', Georgia, 'Times New Roman', serif !important;
 		font-weight: 600 !important;
 		line-height: 1.2;
+		/* Font loading optimization */
+		font-display: swap;
 	}
 
 	p {

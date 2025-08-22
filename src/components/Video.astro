@@ -1,21 +1,94 @@
 ---
-
+// YouTube video ID extracted from the embed URL
+const videoId = '_wWgSQ7bbrw';
+const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+const fallbackThumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 ---
 
 <section id="video" class="section video">
 	<div class="container">
 		<h2 class="section-title">Experience the Tsitsikamma Mountains</h2>
-		<div class="video-wrapper">
+		<div class="video-wrapper" id="videoWrapper">
+			<!-- Lazy-loaded video facade -->
+			<div class="video-facade" id="videoFacade">
+				<img 
+					src={thumbnailUrl} 
+					alt="Tsitsikamma Ultra Trail Teaser Trailer Thumbnail"
+					class="video-thumbnail"
+					loading="lazy"
+					onerror="this.src='{fallbackThumbnailUrl}'"
+				/>
+				<div class="play-button-overlay">
+					<svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M8 5v14l11-7z"/>
+					</svg>
+					<span class="play-text">Watch Video</span>
+				</div>
+			</div>
+			
+			<!-- YouTube iframe (hidden initially) -->
 			<iframe
-				src="https://www.youtube.com/embed/_wWgSQ7bbrw"
+				id="youtubeIframe"
+				src=""
 				title="Tsitsikamma Ultra Trail Teaser Trailer"
 				frameborder="0"
 				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 				allowfullscreen
+				class="youtube-iframe"
+				style="display: none;"
 			></iframe>
 		</div>
 	</div>
 </section>
+
+<script>
+	function initVideoLazyLoad() {
+		const videoWrapper = document.getElementById('videoWrapper');
+		const videoFacade = document.getElementById('videoFacade');
+		const youtubeIframe = document.getElementById('youtubeIframe') as HTMLIFrameElement;
+		
+		if (!videoWrapper || !videoFacade || !youtubeIframe) return;
+		
+		// Handle click on video facade
+		videoFacade.addEventListener('click', function() {
+			// Hide facade
+			videoFacade.style.display = 'none';
+			
+			// Show and load iframe
+			youtubeIframe.style.display = 'block';
+			youtubeIframe.src = 'https://www.youtube.com/embed/_wWgSQ7bbrw?autoplay=1';
+			
+			// Track video play event with Umami
+			if (typeof umami !== 'undefined') {
+				umami.track('video_play', {
+					video_title: 'Tsitsikamma Ultra Trail Teaser Trailer',
+					video_id: '_wWgSQ7bbrw',
+					video_source: 'youtube'
+				});
+			}
+		});
+		
+		// Add keyboard support for accessibility
+		videoFacade.addEventListener('keydown', function(e) {
+			if (e.key === 'Enter' || e.key === ' ') {
+				e.preventDefault();
+				videoFacade.click();
+			}
+		});
+		
+		// Make facade focusable for accessibility
+		videoFacade.setAttribute('tabindex', '0');
+		videoFacade.setAttribute('role', 'button');
+		videoFacade.setAttribute('aria-label', 'Play Tsitsikamma Ultra Trail Teaser Trailer');
+	}
+	
+	// Initialize when DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initVideoLazyLoad);
+	} else {
+		initVideoLazyLoad();
+	}
+</script>
 
 <style>
 	.video {
@@ -32,11 +105,97 @@
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 	}
 
-	.video-wrapper iframe {
+	.video-facade {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
+		cursor: pointer;
+		transition: transform 0.2s ease;
+		background: #000;
+	}
+
+	.video-facade:hover {
+		transform: scale(1.02);
+	}
+
+	.video-facade:focus {
+		outline: 3px solid var(--primary-color);
+		outline-offset: 2px;
+	}
+
+	.video-thumbnail {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+
+	.play-button-overlay {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background: rgba(0, 0, 0, 0.7);
+		border-radius: 50%;
+		width: 80px;
+		height: 80px;
+		transition: all 0.3s ease;
+	}
+
+	.video-facade:hover .play-button-overlay {
+		background: rgba(0, 0, 0, 0.8);
+		transform: translate(-50%, -50%) scale(1.1);
+	}
+
+	.play-icon {
+		width: 32px;
+		height: 32px;
+		color: white;
+		margin-bottom: 4px;
+	}
+
+	.play-text {
+		color: white;
+		font-size: 0.75rem;
+		font-weight: 500;
+		text-align: center;
+		line-height: 1;
+	}
+
+	.youtube-iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	/* Loading state */
+	.video-facade.loading {
+		opacity: 0.7;
+		pointer-events: none;
+	}
+
+	/* Responsive adjustments */
+	@media (max-width: 768px) {
+		.play-button-overlay {
+			width: 60px;
+			height: 60px;
+		}
+		
+		.play-icon {
+			width: 24px;
+			height: 24px;
+		}
+		
+		.play-text {
+			font-size: 0.625rem;
+		}
 	}
 </style>
