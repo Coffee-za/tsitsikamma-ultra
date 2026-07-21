@@ -68,7 +68,7 @@ import Footer from '../components/Footer.astro';
 						<div class="schedule-date">Saturday 29th</div>
 						<div class="schedule-time">05:00</div>
 						<div class="schedule-event">Shuttle Departure</div>
-						<div class="schedule-location">From Covie</div>
+						<div class="schedule-location">From <a href="https://maps.app.goo.gl/tmmxSFvEJeZLTsK76" target="_blank" rel="noopener noreferrer">Covie</a></div>
 						<div class="schedule-note">Important Transport Timing!</div>
 					</div>
 
@@ -76,7 +76,7 @@ import Footer from '../components/Footer.astro';
 						<div class="schedule-date">Saturday 29th</div>
 						<div class="schedule-time">06:00</div>
 						<div class="schedule-event">Race Start Time</div>
-						<div class="schedule-location">TotalEnergies Petroport Tsitsikamma<br>( Headlamp Start )</div>
+						<div class="schedule-location"><a href="https://maps.app.goo.gl/daX1nTF2oxEr3YJGA" target="_blank" rel="noopener noreferrer">TotalEnergies Petroport Tsitsikamma</a><br>( Headlamp Start )</div>
 					</div>
 
 					<div class="schedule-item">
@@ -152,6 +152,8 @@ import Footer from '../components/Footer.astro';
 										<li>Buff or Beanie</li>
 										<li>Emergency Food (300 Calories) 3x Gels or 2x Bars</li>
 										<li>Mobile phone wtih emergency contact saved</li>
+										<li>Johnny - <a href="tel:+27710686903">071 068 6903</a></li>
+										<li>James - <a href="tel:+27829257885">082 925 7885</a></li>
 										<li>Weather Proof Jacket (Minium 10,000mm and sealed seems)</li>
 										<li>Trail running shoes with good grip</li>
 									</ul>
@@ -711,6 +713,16 @@ import Footer from '../components/Footer.astro';
 		font-size: 1rem;
 		color: var(--text-secondary);
 		line-height: 1.4;
+	}
+
+	.schedule-location a {
+		color: var(--primary-color);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	.schedule-location a:hover {
+		color: var(--accent-color);
 	}
 
 	.schedule-note {
