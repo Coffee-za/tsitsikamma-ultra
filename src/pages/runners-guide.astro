@@ -61,7 +61,7 @@ import Footer from '../components/Footer.astro';
 						<div class="schedule-date">Friday 28th</div>
 						<div class="schedule-time">18:00</div>
 						<div class="schedule-event">Race Briefing</div>
-						<div class="schedule-location">The Trail Shop<br>Plettenberg Bay</div>
+						<div class="schedule-location"><a href="https://maps.app.goo.gl/LdRQ879qt5q29pqZ6" target="_blank" rel="noopener noreferrer">The Trail Shop</a><br>Plettenberg Bay</div>
 					</div>
 
 					<div class="schedule-item shuttle">
@@ -83,7 +83,7 @@ import Footer from '../components/Footer.astro';
 						<div class="schedule-date">Saturday 29th</div>
 						<div class="schedule-time">18:00</div>
 						<div class="schedule-event">Race Finish</div>
-						<div class="schedule-location">Covie<br>(12 hours cut-off)</div>
+						<div class="schedule-location"><a href="https://maps.app.goo.gl/tmmxSFvEJeZLTsK76" target="_blank" rel="noopener noreferrer">Covie</a><br>(12 hours cut-off)</div>
 					</div>
 				</div>
 			</div>
@@ -152,8 +152,19 @@ import Footer from '../components/Footer.astro';
 										<li>Buff or Beanie</li>
 										<li>Emergency Food (300 Calories) 3x Gels or 2x Bars</li>
 										<li>Mobile phone wtih emergency contact saved</li>
-										<li>Johnny - <a href="tel:+27710686903">071 068 6903</a></li>
-										<li>James - <a href="tel:+27829257885">082 925 7885</a></li>
+										<li class="emergency-contacts-item">
+											<div class="emergency-contacts-card">
+												<span class="emergency-contacts-label">Emergency Contacts</span>
+												<div class="emergency-contact">
+													<span>Johnny</span>
+													<a href="tel:+27710686903">071 068 6903</a>
+												</div>
+												<div class="emergency-contact">
+													<span>James</span>
+													<a href="tel:+27829257885">082 925 7885</a>
+												</div>
+											</div>
+										</li>
 										<li>Weather Proof Jacket (Minium 10,000mm and sealed seems)</li>
 										<li>Trail running shoes with good grip</li>
 									</ul>
@@ -521,6 +532,56 @@ import Footer from '../components/Footer.astro';
 		background: rgba(205, 213, 174, 0.05);
 		border-radius: 8px;
 		border-left: 4px solid var(--primary-color);
+	}
+
+	.emergency-contacts-item {
+		list-style-type: none;
+		margin: 1rem 0 1.25rem;
+	}
+
+	.emergency-contacts-card {
+		background: rgba(205, 213, 174, 0.08);
+		border: 1px solid rgba(205, 213, 174, 0.25);
+		border-radius: 8px;
+		padding: 0.875rem 1rem;
+	}
+
+	.emergency-contacts-label {
+		display: block;
+		font-size: 0.8rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		color: var(--primary-color);
+		margin-bottom: 0.625rem;
+	}
+
+	.emergency-contact {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.375rem 0;
+		color: var(--text-primary);
+		font-weight: 500;
+	}
+
+	.emergency-contact + .emergency-contact {
+		border-top: 1px solid var(--border-color);
+		margin-top: 0.25rem;
+		padding-top: 0.625rem;
+	}
+
+	.emergency-contact a {
+		color: var(--primary-color);
+		text-decoration: none;
+		font-weight: 600;
+		white-space: nowrap;
+	}
+
+	.emergency-contact a:hover {
+		text-decoration: underline;
+		text-underline-offset: 2px;
 	}
 
 	.cutoff-table {
