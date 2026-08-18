@@ -59,8 +59,14 @@ import Footer from '../components/Footer.astro';
 				<div class="schedule-container">
 					<div class="schedule-item">
 						<div class="schedule-date">Friday 28th</div>
-						<div class="schedule-time">18:00</div>
-						<div class="schedule-event">Race Briefing</div>
+						<div class="schedule-slot">
+							<div class="schedule-time">16:30</div>
+							<div class="schedule-event">Gear Check</div>
+						</div>
+						<div class="schedule-slot">
+							<div class="schedule-time">18:00</div>
+							<div class="schedule-event">Race Briefing</div>
+						</div>
 						<div class="schedule-location"><a href="https://maps.app.goo.gl/LdRQ879qt5q29pqZ6" target="_blank" rel="noopener noreferrer">The Trail Shop</a><br>Plettenberg Bay</div>
 					</div>
 
@@ -756,6 +762,10 @@ import Footer from '../components/Footer.astro';
 		letter-spacing: 0.5px;
 	}
 
+	.schedule-slot {
+		margin-bottom: 0.75rem;
+	}
+
 	.schedule-time {
 		font-size: 1.5rem;
 		font-weight: 700;
@@ -763,12 +773,20 @@ import Footer from '../components/Footer.astro';
 		margin-bottom: 0.5rem;
 	}
 
+	.schedule-slot .schedule-time {
+		font-size: 1.25rem;
+		margin-bottom: 0.15rem;
+	}
 
 	.schedule-event {
 		font-size: 1.25rem;
 		font-weight: 600;
 		color: var(--text-primary);
 		margin-bottom: 0.75rem;
+	}
+
+	.schedule-slot .schedule-event {
+		margin-bottom: 0;
 	}
 
 	.schedule-location {
