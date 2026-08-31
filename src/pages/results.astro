@@ -1,12 +1,19 @@
 ---
+import { getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import resultsBanner from '../assets/ResultsBanner.webp';
+import resultsBanner from '../assets/photos/results-banner.webp';
 import { courseRecords, results2026 } from '../data/results-2026';
 
 const PAGE_SIZE = 50;
 const totalPages = Math.ceil(results2026.length / PAGE_SIZE);
+
+const optimizedBanner = await getImage({
+	src: resultsBanner,
+	width: 1600,
+	format: 'webp',
+});
 ---
 
 <Layout title="Results | Tsitsikamma Ultra">
@@ -89,6 +96,7 @@ const totalPages = Math.ceil(results2026.length / PAGE_SIZE);
 <script>
 	function initResultsPagination() {
 		const table = document.querySelector('.results-table');
+		const tableWrap = document.querySelector('.table-wrap');
 		const nav = document.querySelector('.pagination');
 		if (!table || !nav) return;
 
@@ -121,25 +129,32 @@ const totalPages = Math.ceil(results2026.length / PAGE_SIZE);
 			if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
 		}
 
-		prevBtn?.addEventListener('click', () => {
-			if (currentPage > 1) {
-				currentPage -= 1;
-				render();
-			}
-		});
+		function scrollToTable() {
+			if (!(tableWrap instanceof HTMLElement)) return;
 
-		nextBtn?.addEventListener('click', () => {
-			if (currentPage < totalPages) {
-				currentPage += 1;
-				render();
-			}
-		});
+			const header = document.querySelector('.header');
+			const headerHeight = header instanceof HTMLElement ? header.getBoundingClientRect().height : 0;
+			const top = tableWrap.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+			const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+			window.scrollTo({
+				top: Math.max(0, top),
+				behavior: reducedMotion ? 'auto' : 'smooth',
+			});
+		}
+
+		function goToPage(page: number) {
+			if (page < 1 || page > totalPages || page === currentPage) return;
+			currentPage = page;
+			render();
+			scrollToTable();
+		}
+
+		prevBtn?.addEventListener('click', () => goToPage(currentPage - 1));
+		nextBtn?.addEventListener('click', () => goToPage(currentPage + 1));
 
 		pageBtns.forEach((btn) => {
-			btn.addEventListener('click', () => {
-				currentPage = Number(btn.dataset.page);
-				render();
-			});
+			btn.addEventListener('click', () => goToPage(Number(btn.dataset.page)));
 		});
 
 		render();
@@ -152,7 +167,7 @@ const totalPages = Math.ceil(results2026.length / PAGE_SIZE);
 	}
 </script>
 
-<style define:vars={{ resultsBannerUrl: `url(${resultsBanner.src})` }}>
+<style define:vars={{ resultsBannerUrl: `url(${optimizedBanner.src})` }}>
 	main {
 		padding-top: 80px;
 	}
