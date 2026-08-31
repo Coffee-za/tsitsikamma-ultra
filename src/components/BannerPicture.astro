@@ -1,0 +1,53 @@
+---
+import type { ResponsiveBannerImages } from '../lib/responsive-banner-images';
+
+interface Props {
+	images: ResponsiveBannerImages;
+	class?: string;
+	imgClass?: string;
+	alt?: string;
+	loading?: 'eager' | 'lazy';
+	fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const {
+	images,
+	class: className = '',
+	imgClass = '',
+	alt = '',
+	loading = 'lazy',
+	fetchpriority,
+} = Astro.props;
+---
+
+<picture class:list={['banner-picture', className]}>
+	<source media="(max-width: 768px)" srcset={images.mobileAvif.src} type="image/avif" />
+	<source media="(max-width: 768px)" srcset={images.mobileWebp.src} type="image/webp" />
+	<source media="(max-width: 1024px)" srcset={images.tabletAvif.src} type="image/avif" />
+	<source media="(max-width: 1024px)" srcset={images.tabletWebp.src} type="image/webp" />
+	<source srcset={images.desktopAvif.src} type="image/avif" />
+	<img
+		class:list={['banner-picture__img', imgClass]}
+		src={images.desktopWebp.src}
+		alt={alt}
+		width={images.width}
+		height={images.height}
+		loading={loading}
+		fetchpriority={fetchpriority}
+		decoding="async"
+	/>
+</picture>
+
+<style>
+	.banner-picture {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.banner-picture__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+</style>
