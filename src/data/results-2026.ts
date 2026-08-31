@@ -108,7 +108,7 @@ const dnfResults: { fullName: string; gender: Gender }[] = [
 	{ fullName: 'Werner Blum', gender: 'M' },
 	{ fullName: 'Charl Du Toit', gender: 'M' },
 	{ fullName: 'Debbie Du Toit', gender: 'F' },
-	{ fullName: 'Veronica', gender: 'F' },
+	{ fullName: 'Marybeth Hansen Austin', gender: 'F' },
 ];
 
 const finishers: ResultRow[] = [...rawResults]
