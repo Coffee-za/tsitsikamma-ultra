@@ -1,15 +1,27 @@
 ---
-import trailLogo from '../assets/Trail_Logo.webp';
-import guLogo from '../assets/GU_Logo.webp';
-import mtoLogo from '../assets/MTO_Trail_Logo.webp';
-import muddyLogo from '../assets/Muddy_Logo.webp';
-import ppLogo from '../assets/PP_Logo.webp';
-import salomonLogo from '../assets/Salomon_Logo.webp';
-import soxLogo from '../assets/Sox_Logo.webp';
-import saltLogo from '../assets/Salt.webp';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import trailLogo from '../assets/logos/trail-shop.webp';
+import guLogo from '../assets/logos/gu-energy.webp';
+import mtoLogo from '../assets/logos/mto-trail.webp';
+import muddyLogo from '../assets/logos/muddy-foot.webp';
+import ppLogo from '../assets/logos/plett-pixels.webp';
+import salomonLogo from '../assets/logos/salomon.webp';
+import soxLogo from '../assets/logos/sox.webp';
+import saltLogo from '../assets/logos/salt.webp';
 
-// Ensure component is properly parsed
-const componentLoaded = true;
+const sponsors: { src: ImageMetadata; alt: string; href: string }[] = [
+	{ src: trailLogo, alt: 'The Trail Shop Logo', href: 'https://www.thebikeshop.co.za/' },
+	{ src: guLogo, alt: 'GU Energy Logo', href: 'https://guenergy.co.za/' },
+	{ src: mtoLogo, alt: 'MTO Trail Logo', href: 'https://www.mtotrails.com/' },
+	{ src: muddyLogo, alt: 'Muddy Foot Adventures Logo', href: 'https://facebook.com/muddyfootadventures/' },
+	{ src: ppLogo, alt: 'Plett Pixels Logo', href: 'https://plettpixels.com/' },
+	{ src: salomonLogo, alt: 'Salomon Logo', href: 'https://salomonsports.co.za/' },
+	{ src: soxLogo, alt: 'Sox Logo', href: 'https://soxfootwear.co.za/' },
+	{ src: saltLogo, alt: 'Salt Logo', href: 'https://saltplettenbergbay.co.za/' },
+];
+
+const carouselSponsors = [...sponsors, ...sponsors];
 ---
 
 <section id="sponsors" class="section sponsors">
@@ -17,89 +29,13 @@ const componentLoaded = true;
 		<h2 class="section-title">Our Sponsors</h2>
 		<div class="sponsors-carousel">
 			<div class="sponsors-track">
-				<!-- First set of sponsors -->
-				<div class="sponsor-logo">
-					<a href="https://www.thebikeshop.co.za/" target="_blank" rel="noopener noreferrer">
-						<img src={trailLogo.src} alt="The Trail Shop Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://guenergy.co.za/" target="_blank" rel="noopener noreferrer">
-						<img src={guLogo.src} alt="GU Energy Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://www.mtotrails.com/" target="_blank" rel="noopener noreferrer">
-						<img src={mtoLogo.src} alt="MTO Trail Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://facebook.com/muddyfootadventures/" target="_blank" rel="noopener noreferrer">
-						<img src={muddyLogo.src} alt="Muddy Foot Adeventures Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://plettpixels.com/" target="_blank" rel="noopener noreferrer">
-						<img src={ppLogo.src} alt="Plett Pixels Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://salomonsports.co.za/" target="_blank" rel="noopener noreferrer">
-						<img src={salomonLogo.src} alt="Salomon Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://soxfootwear.co.za/" target="_blank" rel="noopener noreferrer">
-						<img src={soxLogo.src} alt="Sox Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://saltplettenbergbay.co.za/" target="_blank" rel="noopener noreferrer">
-						<img src={saltLogo.src} alt="Salt Logo" />
-					</a>
-				</div>
-				
-				<!-- Duplicate set for seamless loop -->
-				<div class="sponsor-logo">
-					<a href="https://www.thebikeshop.co.za/" target="_blank" rel="noopener noreferrer">
-						<img src={trailLogo.src} alt="The Trail Shop Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://guenergy.co.za/" target="_blank" rel="noopener noreferrer">
-						<img src={guLogo.src} alt="GU Energy Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://www.mtotrails.com/" target="_blank" rel="noopener noreferrer">
-						<img src={mtoLogo.src} alt="MTO Trail Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://facebook.com/muddyfootadventures/" target="_blank" rel="noopener noreferrer">
-						<img src={muddyLogo.src} alt="Muddy Foot Adventures Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://plettpixels.com/" target="_blank" rel="noopener noreferrer">
-						<img src={ppLogo.src} alt="Plett Pixels Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://salomonsports.co.za/" target="_blank" rel="noopener noreferrer">
-						<img src={salomonLogo.src} alt="Salomon Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://soxfootwear.co.za/" target="_blank" rel="noopener noreferrer">
-						<img src={soxLogo.src} alt="Sox Logo" />
-					</a>
-				</div>
-				<div class="sponsor-logo">
-					<a href="https://saltplettenbergbay.co.za/" target="_blank" rel="noopener noreferrer">
-						<img src={saltLogo.src} alt="Salt Logo" />
-					</a>
-				</div>
+				{carouselSponsors.map((sponsor) => (
+					<div class="sponsor-logo">
+						<a href={sponsor.href} target="_blank" rel="noopener noreferrer">
+							<Image src={sponsor.src} alt={sponsor.alt} width={200} loading="lazy" />
+						</a>
+					</div>
+				))}
 			</div>
 		</div>
 	</div>
@@ -157,9 +93,6 @@ const componentLoaded = true;
 		max-height: 100%;
 		object-fit: contain;
 		transition: filter 0.3s ease;
-	}
-
-	.sponsor-logo:hover img {
 	}
 
 	@keyframes scroll {

@@ -1,5 +1,6 @@
 ---
-import logoImage from '../assets/Ultra_Logo_White_Cropped.webp';
+import { Image } from 'astro:assets';
+import logoImage from '../assets/logos/ultra-logo.webp';
 ---
 
 <header class="header">
@@ -7,7 +8,7 @@ import logoImage from '../assets/Ultra_Logo_White_Cropped.webp';
 		<nav class="nav">
 			<div class="nav-brand">
 				<a href="/">
-					<img src={logoImage.src} alt="Tsitsikamma Ultra Logo" class="logo" />
+					<Image src={logoImage} alt="Tsitsikamma Ultra Logo" class="logo" width={160} densities={[1, 2]} loading="eager" />
 				</a>
 			</div>
 			<ul class="nav-links">

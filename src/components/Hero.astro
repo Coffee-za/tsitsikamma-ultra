@@ -1,16 +1,34 @@
 ---
-import logoImage from '../assets/Ultra_Logo_White_Cropped.webp';
+import { Image } from 'astro:assets';
+import { getHeroImages } from '../lib/hero-images';
+import logoImage from '../assets/logos/ultra-logo.webp';
+
+const hero = await getHeroImages();
 ---
 
 <section class="hero">
 	<div class="hero-background">
-		<!-- Responsive background image container -->
-		<div class="hero-bg-image"></div>
+		<picture class="hero-bg-image">
+			<source media="(max-width: 768px)" srcset={hero.mobileAvif.src} type="image/avif" />
+			<source media="(max-width: 768px)" srcset={hero.mobileWebp.src} type="image/webp" />
+			<source media="(max-width: 1024px)" srcset={hero.tabletAvif.src} type="image/avif" />
+			<source media="(max-width: 1024px)" srcset={hero.tabletWebp.src} type="image/webp" />
+			<source srcset={hero.desktopAvif.src} type="image/avif" />
+			<img
+				src={hero.desktopWebp.src}
+				alt=""
+				width={hero.width}
+				height={hero.height}
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+			/>
+		</picture>
 	</div>
 	<div class="container">
 		<div class="hero-content">
 			<div class="hero-logo">
-				<img src={logoImage.src} alt="Tsitsikamma Ultra Logo" class="logo" />
+				<Image src={logoImage} alt="Tsitsikamma Ultra Logo" class="logo" width={300} densities={[1, 2]} loading="eager" />
 			</div>
 			<h1 class="hero-title">2026 Entries Now Closed</h1>
 			<p class="hero-subtitle">Run Like The Trees Are Cheering</p>
@@ -43,50 +61,45 @@ import logoImage from '../assets/Ultra_Logo_White_Cropped.webp';
 	}
 
 	.hero-bg-image {
+		display: block;
 		width: 100%;
 		height: 100%;
-		background-image: url('/Hero Banner_webp.webp');
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-attachment: fixed;
 	}
 
-	/* Responsive adjustments for different screen sizes */
+	.hero-bg-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+
 	@media (max-width: 1024px) {
-		.hero-bg-image {
-			background-image: url('/hero-banner-tablet.webp');
-			background-position: center 20%;
-			background-attachment: scroll;
+		.hero-bg-image img {
+			object-position: center 20%;
 		}
 	}
 
 	@media (max-width: 768px) {
-		.hero-bg-image {
-			background-image: url('/hero-banner-mobile.webp');
-			background-position: center 25%;
-			background-attachment: scroll;
+		.hero-bg-image img {
+			object-position: center 25%;
 		}
 	}
 
 	@media (max-width: 480px) {
-		.hero-bg-image {
-			background-image: url('/hero-banner-mobile.webp');
-			background-position: center 30%;
+		.hero-bg-image img {
+			object-position: center 30%;
 		}
 	}
 
-	/* Ensure consistent hero section height and positioning across devices */
 	@media (max-height: 600px) {
-		.hero-bg-image {
-			background-position: center 15%;
+		.hero-bg-image img {
+			object-position: center 15%;
 		}
 	}
 
-	/* Landscape orientation adjustments */
 	@media (orientation: landscape) and (max-height: 500px) {
-		.hero-bg-image {
-			background-position: center 10%;
+		.hero-bg-image img {
+			object-position: center 10%;
 		}
 	}
 

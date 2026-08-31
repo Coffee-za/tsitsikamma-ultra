@@ -1,24 +1,25 @@
 ---
-import braaingImage from '../assets/Braaing.webp';
-import kevinJohnnyImage from '../assets/KevinJohnny.webp';
-import runnerHeadLampImage from '../assets/RunnerWithHeadLamp.webp';
-import smilingImage from '../assets/Smiling.webp';
+import { Image } from 'astro:assets';
+import braaingImage from '../assets/photos/gallery-braai.webp';
+import kevinJohnnyImage from '../assets/photos/gallery-kevin-johnny.webp';
+import runnerHeadLampImage from '../assets/photos/gallery-headlamp.webp';
+import smilingImage from '../assets/photos/gallery-smiling.webp';
 
 const galleryImages = [
   {
-    src: braaingImage.src,
+    src: braaingImage,
     alt: 'Post-race braai celebration - boerwors on the grill'
   },
   {
-    src: kevinJohnnyImage.src,
+    src: kevinJohnnyImage,
     alt: 'Kevin and Johnny at the race after the Tsitsikamma Ultra Marathon'
   },
   {
-    src: runnerHeadLampImage.src,
+    src: runnerHeadLampImage,
     alt: 'Trail runner with headlamp'
   },
   {
-    src: smilingImage.src,
+    src: smilingImage,
     alt: 'Happy trail runner inside the Bloukrans hut'
   }
 ];
@@ -29,7 +30,7 @@ const galleryImages = [
 		<div class="gallery-grid">
 			{galleryImages.map((image, index) => (
 				<div class="gallery-item" style={`animation-delay: ${index * 0.1}s`}>
-					<img src={image.src} alt={image.alt} loading="lazy" />
+					<Image src={image.src} alt={image.alt} widths={[280, 400]} sizes="(max-width: 768px) 85vw, 280px" loading="lazy" />
 					<div class="gallery-overlay">
 						<div class="overlay-content">
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

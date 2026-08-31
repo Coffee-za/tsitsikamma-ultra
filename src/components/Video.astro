@@ -1,8 +1,6 @@
 ---
-// YouTube video ID extracted from the embed URL
-const videoId = '_wWgSQ7bbrw';
-const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-const fallbackThumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+import { Image } from 'astro:assets';
+import videoPoster from '../assets/photos/video-poster.webp';
 ---
 
 <section id="video" class="section video">
@@ -11,12 +9,13 @@ const fallbackThumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jp
 		<div class="video-wrapper" id="videoWrapper">
 			<!-- Lazy-loaded video facade -->
 			<div class="video-facade" id="videoFacade">
-				<img 
-					src={thumbnailUrl} 
+				<Image
+					src={videoPoster}
 					alt="Tsitsikamma Ultra Trail Teaser Trailer Thumbnail"
 					class="video-thumbnail"
+					widths={[640, 960, 1280]}
+					sizes="(max-width: 768px) 100vw, 1100px"
 					loading="lazy"
-					onerror="this.src='{fallbackThumbnailUrl}'"
 				/>
 				<div class="play-button-overlay">
 					<svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">

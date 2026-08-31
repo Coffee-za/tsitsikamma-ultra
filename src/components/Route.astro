@@ -1,9 +1,9 @@
 ---
-import elevationGraph from '../assets/Route_Elevation.svg';
-import rulerIcon from '../assets/ruler.svg';
-import mountainsIcon from '../assets/mountains.svg';
-import timerIcon from '../assets/timer.svg';
-import hamburgerIcon from '../assets/hamburger.svg';
+import elevationGraph from '../assets/photos/route-elevation.svg';
+import rulerIcon from '../assets/icons/ruler.svg';
+import mountainsIcon from '../assets/icons/mountains.svg';
+import timerIcon from '../assets/icons/timer.svg';
+import aidStationIcon from '../assets/icons/aid-station.svg';
 ---
 
 <section id="route" class="section route">
@@ -12,33 +12,33 @@ import hamburgerIcon from '../assets/hamburger.svg';
 		<div class="elevation-chart-container card">
 			<h3>Elevation Profile</h3>
 			<div class="elevation-scroll">
-				<img src={elevationGraph.src} alt="Tsitsikamma Ultra 2026 Route Elevation Profile" class="elevation-image" />
+				<img src={elevationGraph.src} alt="Tsitsikamma Ultra 2026 Route Elevation Profile" class="elevation-image" width={elevationGraph.width} height={elevationGraph.height} />
 			</div>
 			<div class="chart-info">
 				<div class="chart-stat">
 					<div class="stat-icon">
-						<img src={rulerIcon.src} alt="Distance" />
+						<img src={rulerIcon.src} alt="" aria-hidden="true" width="24" height="24" />
 					</div>
 					<span class="stat-value">Distance</span>
 					<span class="stat-desc">50km</span>
 				</div>
 				<div class="chart-stat">
 					<div class="stat-icon">
-						<img src={mountainsIcon.src} alt="Elevation" />
+						<img src={mountainsIcon.src} alt="" aria-hidden="true" width="24" height="24" />
 					</div>
 					<span class="stat-value">Elevation Gain</span>
 					<span class="stat-desc">2,500m</span>
 				</div>
 				<div class="chart-stat">
 					<div class="stat-icon">
-						<img src={timerIcon.src} alt="Cut-off Time" />
+						<img src={timerIcon.src} alt="" aria-hidden="true" width="24" height="24" />
 					</div>
 					<span class="stat-value">Cut-off Time</span>
 					<span class="stat-desc">12 hours</span>
 				</div>
 				<div class="chart-stat">
 					<div class="stat-icon">
-						<img src={hamburgerIcon.src} alt="Aid Stations" />
+						<img src={aidStationIcon.src} alt="" aria-hidden="true" width="24" height="24" />
 					</div>
 					<span class="stat-value">Aid Stations</span>
 					<span class="stat-desc">2</span>

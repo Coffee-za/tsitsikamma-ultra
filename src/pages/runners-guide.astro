@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 
 ---
 
@@ -26,7 +28,7 @@ import Footer from '../components/Footer.astro';
 						</a>
 					</div>
 					<div class="hero-image">
-						<img src="/Guide_Hero_Collage.webp" alt="Trail runner in forest" />
+						<Image src={runnersGuideHero} alt="Trail runner in forest" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 500px" loading="eager" />
 					</div>
 				</div>
 			</div>
