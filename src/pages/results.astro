@@ -1,0 +1,469 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import resultsBanner from '../assets/ResultsBanner.webp';
+import { courseRecords, results2026 } from '../data/results-2026';
+
+const PAGE_SIZE = 50;
+const totalPages = Math.ceil(results2026.length / PAGE_SIZE);
+---
+
+<Layout title="Results | Tsitsikamma Ultra">
+	<Header />
+	<main>
+		<section class="hero-banner" aria-hidden="true"></section>
+
+		<section class="section results-section">
+			<div class="container">
+				<div class="results-header">
+					<div class="title-group">
+						<h1 class="page-title">Results</h1>
+						<label class="year-label">
+							<span class="sr-only">Select year</span>
+							<select class="year-select" name="year" aria-label="Results year">
+								<option value="2026" selected>2026</option>
+							</select>
+						</label>
+					</div>
+
+					<div class="record-cards">
+						{courseRecords.map((record) => (
+							<div class="record-card">
+								<div class="record-label">{record.label}</div>
+								<div class="record-name">{record.name}</div>
+								<div class="record-time">{record.time}</div>
+							</div>
+						))}
+					</div>
+				</div>
+
+				<div class="table-wrap">
+					<table class="results-table">
+						<thead>
+							<tr>
+								<th>Overall Position</th>
+								<th>Full Name</th>
+								<th>Gender</th>
+								<th>Category Position</th>
+								<th>Finish Time</th>
+							</tr>
+						</thead>
+						<tbody>
+							{results2026.map((row) => (
+								<tr class:list={{ 'dnf-row': row.status === 'dnf' }}>
+									<td>{row.status === 'dnf' ? 'DNF' : row.overallPosition}</td>
+									<td>{row.fullName}</td>
+									<td>{row.gender}</td>
+									<td>{row.status === 'dnf' ? '-' : `${row.categoryPosition} · ${row.category}`}</td>
+									<td>{row.finishTime}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+
+				<nav class="pagination" aria-label="Results pages" data-page-size={PAGE_SIZE} data-total-pages={totalPages}>
+					<button type="button" class="page-btn page-prev" data-action="prev" disabled>Previous</button>
+					<div class="page-numbers">
+						{Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+							<button
+								type="button"
+								class:list={['page-btn', 'page-num', { active: page === 1 }]}
+								data-page={page}
+								aria-label={`Page ${page}`}
+								aria-current={page === 1 ? 'page' : undefined}
+							>
+								{page}
+							</button>
+						))}
+					</div>
+					<button type="button" class="page-btn page-next" data-action="next" disabled={totalPages <= 1}>Next</button>
+				</nav>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>
+
+<script>
+	function initResultsPagination() {
+		const table = document.querySelector('.results-table');
+		const nav = document.querySelector('.pagination');
+		if (!table || !nav) return;
+
+		const rows = [...table.querySelectorAll('tbody tr')];
+		const pageSize = Number(nav.getAttribute('data-page-size')) || 50;
+		const totalPages = Number(nav.getAttribute('data-total-pages')) || 1;
+		const prevBtn = nav.querySelector<HTMLButtonElement>('[data-action="prev"]');
+		const nextBtn = nav.querySelector<HTMLButtonElement>('[data-action="next"]');
+		const pageBtns = [...nav.querySelectorAll<HTMLButtonElement>('.page-num')];
+		let currentPage = 1;
+
+		function render() {
+			rows.forEach((row, index) => {
+				const page = Math.floor(index / pageSize) + 1;
+				row.toggleAttribute('hidden', page !== currentPage);
+			});
+
+			pageBtns.forEach((btn) => {
+				const page = Number(btn.dataset.page);
+				const isActive = page === currentPage;
+				btn.classList.toggle('active', isActive);
+				if (isActive) {
+					btn.setAttribute('aria-current', 'page');
+				} else {
+					btn.removeAttribute('aria-current');
+				}
+			});
+
+			if (prevBtn) prevBtn.disabled = currentPage <= 1;
+			if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
+		}
+
+		prevBtn?.addEventListener('click', () => {
+			if (currentPage > 1) {
+				currentPage -= 1;
+				render();
+			}
+		});
+
+		nextBtn?.addEventListener('click', () => {
+			if (currentPage < totalPages) {
+				currentPage += 1;
+				render();
+			}
+		});
+
+		pageBtns.forEach((btn) => {
+			btn.addEventListener('click', () => {
+				currentPage = Number(btn.dataset.page);
+				render();
+			});
+		});
+
+		render();
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initResultsPagination);
+	} else {
+		initResultsPagination();
+	}
+</script>
+
+<style define:vars={{ resultsBannerUrl: `url(${resultsBanner.src})` }}>
+	main {
+		padding-top: 80px;
+	}
+
+	.hero-banner {
+		width: 100%;
+		height: 280px;
+		background-image: var(--resultsBannerUrl);
+		background-size: cover;
+		background-position: center 55%;
+		background-repeat: no-repeat;
+		position: relative;
+	}
+
+	.hero-banner::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.4);
+	}
+
+	.results-section {
+		padding-top: 2.5rem;
+		padding-bottom: 4rem;
+	}
+
+	.results-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.title-group {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		flex-shrink: 0;
+	}
+
+	.page-title {
+		font-size: 3rem;
+		color: var(--primary-color);
+		margin: 0;
+	}
+
+	.year-label {
+		display: flex;
+		align-items: center;
+	}
+
+	.year-select {
+		padding: 0.6rem 2rem 0.6rem 0.85rem;
+		border: 2px solid var(--border-color);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.05);
+		color: var(--text-primary);
+		font-size: 1rem;
+		font-weight: 500;
+		cursor: pointer;
+		appearance: none;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23CDD5AE' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 0.75rem center;
+		transition: all 0.3s ease;
+	}
+
+	.year-select:focus {
+		outline: none;
+		border-color: var(--primary-color);
+		box-shadow: 0 0 0 3px rgba(205, 213, 174, 0.1);
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.record-cards {
+		display: flex;
+		gap: 1rem;
+		flex: 1;
+		justify-content: flex-end;
+		min-width: 0;
+	}
+
+	.record-card {
+		background: var(--card-background);
+		border: 1px solid var(--border-color);
+		border-radius: 12px;
+		padding: 1rem 1.25rem;
+		text-align: center;
+		transition: all 0.3s ease;
+		flex: 1;
+		max-width: 260px;
+		min-width: 160px;
+	}
+
+	.record-card:hover {
+		transform: translateY(-4px);
+		border-color: var(--primary-color);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+	}
+
+	.record-label {
+		font-size: 0.75rem;
+		color: var(--accent-color);
+		margin-bottom: 0.35rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.record-name {
+		font-size: 1rem;
+		font-weight: 600;
+		color: var(--text-primary);
+		margin-bottom: 0.25rem;
+	}
+
+	.record-time {
+		font-size: 1.35rem;
+		font-weight: 700;
+		color: var(--primary-color);
+	}
+
+	.table-wrap {
+		overflow-x: auto;
+		border: 1px solid var(--border-color);
+		border-radius: 12px;
+		background: rgba(205, 213, 174, 0.05);
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.results-table {
+		width: 100%;
+		border-collapse: collapse;
+		min-width: 720px;
+	}
+
+	.results-table th,
+	.results-table td {
+		padding: 0.85rem 1rem;
+		text-align: left;
+		white-space: nowrap;
+	}
+
+	.results-table th {
+		font-weight: 600;
+		color: var(--primary-color);
+		border-bottom: 2px solid var(--primary-color);
+		font-size: 0.875rem;
+		letter-spacing: 0.3px;
+	}
+
+	.results-table td {
+		border-bottom: 1px solid var(--border-color);
+		color: var(--text-secondary);
+		font-weight: 500;
+	}
+
+	.results-table tbody tr:last-child td {
+		border-bottom: none;
+	}
+
+	.results-table tbody tr:hover td {
+		background: rgba(205, 213, 174, 0.06);
+		color: var(--text-primary);
+	}
+
+	.results-table tbody tr.dnf-row td {
+		color: var(--text-secondary);
+		opacity: 0.72;
+	}
+
+	.results-table tbody tr.dnf-row:hover td {
+		opacity: 1;
+	}
+
+	.pagination {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75rem;
+		margin-top: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.page-numbers {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.page-btn {
+		padding: 0.55rem 1rem;
+		border-radius: 8px;
+		background: var(--card-background);
+		color: var(--text-primary);
+		border: 1px solid var(--border-color);
+		font-weight: 500;
+		min-width: 44px;
+	}
+
+	.page-btn:hover:not(:disabled) {
+		border-color: var(--primary-color);
+		color: var(--primary-color);
+	}
+
+	.page-btn.active {
+		background: var(--primary-color);
+		color: var(--background-color);
+		border-color: var(--primary-color);
+	}
+
+	.page-btn:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+
+	@media (max-width: 1024px) {
+		.results-header {
+			align-items: stretch;
+		}
+
+		.record-cards {
+			justify-content: stretch;
+			width: 100%;
+		}
+
+		.record-card {
+			max-width: none;
+		}
+	}
+
+	@media (max-width: 768px) {
+		main {
+			padding-top: 70px;
+		}
+
+		.hero-banner {
+			height: 180px;
+			background-position: center 60%;
+		}
+
+		.results-section {
+			padding-top: 1.75rem;
+			padding-bottom: 3rem;
+		}
+
+		.page-title {
+			font-size: 2.25rem;
+		}
+
+		.results-header {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 1.25rem;
+		}
+
+		.title-group {
+			justify-content: space-between;
+		}
+
+		.record-cards {
+			flex-direction: row;
+		}
+
+		.record-card {
+			padding: 0.85rem 1rem;
+			min-width: 0;
+		}
+
+		.record-name {
+			font-size: 0.9rem;
+		}
+
+		.record-time {
+			font-size: 1.15rem;
+		}
+
+		.results-table th,
+		.results-table td {
+			padding: 0.7rem 0.75rem;
+			font-size: 0.9rem;
+		}
+
+		.pagination {
+			gap: 0.5rem;
+		}
+
+		.page-btn {
+			padding: 0.5rem 0.8rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.record-cards {
+			flex-direction: column;
+		}
+
+		.hero-banner {
+			height: 160px;
+		}
+	}
+</style>
