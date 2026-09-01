@@ -1,0 +1,292 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import BannerPicture from '../../../components/BannerPicture.astro';
+import PhotoGallery from '../../../components/PhotoGallery.astro';
+import resultsBanner from '../../../assets/photos/results-banner.webp';
+import { getResponsiveBannerImages } from '../../../lib/responsive-banner-images';
+import { getGalleryPhotos, getPhotographerCovers } from '../../../lib/gallery-images';
+import {
+	galleryYear,
+	photographerHref,
+	photographerLinkLabel,
+	type GalleryPhotographer,
+} from '../../../data/gallery';
+
+export async function getStaticPaths() {
+	const covers = await getPhotographerCovers(galleryYear);
+
+	return covers
+		.filter((entry) => entry.href)
+		.map((entry) => ({
+			params: {
+				year: String(galleryYear),
+				photographer: entry.photographer.slug,
+			},
+			props: {
+				photographer: entry.photographer,
+			},
+		}));
+}
+
+interface Props {
+	photographer: GalleryPhotographer;
+}
+
+const { year } = Astro.params;
+const { photographer } = Astro.props;
+const bannerImages = await getResponsiveBannerImages(resultsBanner);
+const photos = await getGalleryPhotos({ photographerFolder: photographer.folder });
+const creditHref = photographerHref(photographer);
+const creditLabel = photographerLinkLabel(photographer);
+const yearNumber = Number(year) || galleryYear;
+---
+
+<Layout
+	title={`${photographer.name} | Gallery | Tsitsikamma Ultra`}
+	description={`Relive the ${yearNumber} Tsitsikamma Ultra through photos by ${photographer.name} — from the early Petroport start, through the forests, to the finish at Covie.`}
+>
+	<Header />
+	<main>
+		<section class="hero-banner" aria-hidden="true">
+			<BannerPicture
+				images={bannerImages}
+				imgClass="hero-banner__img"
+				alt=""
+				loading="eager"
+			/>
+		</section>
+
+		<section class="section gallery-section">
+			<div class="container">
+				<div class="gallery-header">
+					<div class="title-group">
+						<h1 class="page-title">Gallery</h1>
+						<label class="year-label">
+							<span class="sr-only">Select year</span>
+							<select class="year-select" name="year" aria-label="Gallery year">
+								<option value={yearNumber} selected>{yearNumber}</option>
+							</select>
+						</label>
+					</div>
+				</div>
+
+				<p class="back-link">
+					<a href="/gallery">All photographers</a>
+				</p>
+
+				<div class="gallery-intro">
+					<p>
+						Relive the race — from the early Petroport start, through the forests, to the finish at Covie. These are the moments worth holding onto.
+					</p>
+					<p>
+						These photographs may not be used for commercial gain. Please tag or credit {photographer.name}, and Tsitsikamma Ultra, so we can share the love.
+					</p>
+				</div>
+
+				<ul class="photographer-credits">
+					<li>
+						<span class="photographer-name">{photographer.name}</span>
+						{creditHref ? (
+							<a href={creditHref} target="_blank" rel="noopener noreferrer">
+								{creditLabel}
+							</a>
+						) : null}
+					</li>
+				</ul>
+
+				<PhotoGallery photos={photos} />
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+	main {
+		padding-top: 80px;
+	}
+
+	.hero-banner {
+		width: 100%;
+		height: 364px;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.hero-banner :global(.banner-picture) {
+		position: absolute;
+		inset: 0;
+	}
+
+	.hero-banner__img {
+		object-position: center 55%;
+	}
+
+	.hero-banner::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	.gallery-section {
+		padding-top: 2.5rem;
+		padding-bottom: 4rem;
+	}
+
+	.gallery-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		margin-bottom: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.title-group {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		flex-shrink: 0;
+	}
+
+	.page-title {
+		font-size: 3rem;
+		color: var(--primary-color);
+		margin: 0;
+	}
+
+	.year-label {
+		display: flex;
+		align-items: center;
+	}
+
+	.year-select {
+		padding: 0.6rem 2rem 0.6rem 0.85rem;
+		border: 2px solid var(--border-color);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.05);
+		color: var(--text-primary);
+		font-size: 1rem;
+		font-weight: 500;
+		cursor: pointer;
+		appearance: none;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23CDD5AE' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 0.75rem center;
+		transition: all 0.3s ease;
+	}
+
+	.year-select:focus {
+		outline: none;
+		border-color: var(--primary-color);
+		box-shadow: 0 0 0 3px rgba(205, 213, 174, 0.1);
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.back-link {
+		margin: 0 0 1.25rem;
+	}
+
+	.back-link a {
+		font-size: 0.95rem;
+		font-weight: 500;
+	}
+
+	.gallery-intro {
+		max-width: 720px;
+		margin-bottom: 1.75rem;
+	}
+
+	.gallery-intro p {
+		color: var(--text-secondary);
+		font-size: 1.05rem;
+		line-height: 1.65;
+	}
+
+	.gallery-intro p + p {
+		margin-top: 0.85rem;
+	}
+
+	.photographer-credits {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem 1.5rem;
+		list-style: none;
+		margin: 0 0 2rem;
+		padding: 1rem 1.25rem;
+		background: var(--card-background);
+		border: 1px solid var(--border-color);
+		border-radius: 12px;
+	}
+
+	.photographer-credits li {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.4rem 0.75rem;
+	}
+
+	.photographer-name {
+		font-weight: 600;
+		color: var(--text-primary);
+	}
+
+	.photographer-credits a {
+		font-size: 0.95rem;
+	}
+
+	@media (max-width: 768px) {
+		main {
+			padding-top: 70px;
+		}
+
+		.hero-banner {
+			height: 270px;
+		}
+
+		.hero-banner__img {
+			object-position: center 60%;
+		}
+
+		.gallery-section {
+			padding-top: 1.75rem;
+			padding-bottom: 3rem;
+		}
+
+		.page-title {
+			font-size: 2.25rem;
+		}
+
+		.title-group {
+			justify-content: space-between;
+			width: 100%;
+		}
+
+		.gallery-intro p {
+			font-size: 1rem;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.hero-banner {
+			height: 240px;
+		}
+	}
+</style>

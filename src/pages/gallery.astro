@@ -6,16 +6,15 @@ import Footer from '../components/Footer.astro';
 import BannerPicture from '../components/BannerPicture.astro';
 import resultsBanner from '../assets/photos/results-banner.webp';
 import { getResponsiveBannerImages } from '../lib/responsive-banner-images';
-import { getGalleryPhotos } from '../lib/gallery-images';
+import { getPhotographerCovers } from '../lib/gallery-images';
 import {
 	galleryYear,
-	photographers,
 	photographerHref,
 	photographerLinkLabel,
 } from '../data/gallery';
 
 const bannerImages = await getResponsiveBannerImages(resultsBanner);
-const photos = await getGalleryPhotos();
+const covers = await getPhotographerCovers(galleryYear);
 ---
 
 <Layout
@@ -56,16 +55,56 @@ const photos = await getGalleryPhotos();
 					</p>
 				</div>
 
-				<ul class="photographer-credits">
-					{photographers.map((photographer) => {
-						const href = photographerHref(photographer);
-						const label = photographerLinkLabel(photographer);
+				<ul class="photographer-covers">
+					{covers.map((entry) => {
+						const href = photographerHref(entry.photographer);
+						const label = photographerLinkLabel(entry.photographer);
+						const isAvailable = Boolean(entry.href);
+						const coverAlt = entry.cover
+							? entry.cover.alt
+							: `${entry.photographer.name} — photos added soon`;
 
 						return (
-							<li>
-								<span class="photographer-name">{photographer.name}</span>
+							<li class:list={['cover-card', { 'is-soon': !isAvailable }]}>
+								{isAvailable && entry.cover ? (
+									<a class="cover-media" href={entry.href}>
+										<Image
+											src={entry.cover.src}
+											alt={coverAlt}
+											widths={[640, 960, 1280]}
+											sizes="(max-width: 768px) 100vw, 50vw"
+											loading="eager"
+										/>
+										<span class="cover-overlay">
+											<span class="cover-name">{entry.photographer.name}</span>
+										</span>
+									</a>
+								) : (
+									<div class="cover-media" aria-disabled="true">
+										{entry.cover ? (
+											<Image
+												src={entry.cover.src}
+												alt={coverAlt}
+												widths={[640, 960, 1280]}
+												sizes="(max-width: 768px) 100vw, 50vw"
+												loading="eager"
+											/>
+										) : (
+											<div class="cover-placeholder" aria-hidden="true"></div>
+										)}
+										<span class="cover-overlay">
+											<span class="cover-name">{entry.photographer.name}</span>
+											<span class="cover-badge">Photos added soon</span>
+										</span>
+									</div>
+								)}
 								{href ? (
-									<a href={href} target="_blank" rel="noopener noreferrer">
+									<a
+										class="cover-credit"
+										href={href}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
 										{label}
 									</a>
 								) : null}
@@ -73,156 +112,12 @@ const photos = await getGalleryPhotos();
 						);
 					})}
 				</ul>
-
-				{photos.length > 0 ? (
-					<div class="photo-grid">
-						{photos.map((photo, index) => {
-							const creditHref = photographerHref(photo.photographer);
-
-							return (
-								<figure class="photo-card">
-									<button
-										type="button"
-										class="photo-trigger"
-										data-index={index}
-										data-src={photo.lightboxSrc}
-										data-alt={photo.alt}
-										data-width={photo.lightboxWidth}
-										data-height={photo.lightboxHeight}
-										data-credit={photo.photographer.name}
-										data-credit-href={creditHref ?? ''}
-										aria-label={`Enlarge photo: ${photo.alt}`}
-									>
-										<Image
-											src={photo.src}
-											alt={photo.alt}
-											widths={[400, 600, 800]}
-											sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-											loading={index < 6 ? 'eager' : 'lazy'}
-											class="photo-thumb"
-										/>
-										<span class="photo-credit">Photo: {photo.photographer.name}</span>
-									</button>
-								</figure>
-							);
-						})}
-					</div>
-				) : (
-					<p class="empty-state">Photos for this year will be added soon.</p>
-				)}
 			</div>
 		</section>
 	</main>
 
-	<dialog class="lightbox" id="gallery-lightbox" aria-labelledby="lightbox-caption">
-		<button type="button" class="lightbox-close" aria-label="Close photo">
-			<span aria-hidden="true">&times;</span>
-		</button>
-		<button type="button" class="lightbox-nav lightbox-prev" data-action="prev" aria-label="Previous photo">
-			<span aria-hidden="true">&#8249;</span>
-		</button>
-		<figure class="lightbox-figure">
-			<img class="lightbox-image" alt="" />
-			<figcaption id="lightbox-caption" class="lightbox-caption">
-				<a class="lightbox-credit" target="_blank" rel="noopener noreferrer"></a>
-			</figcaption>
-		</figure>
-		<button type="button" class="lightbox-nav lightbox-next" data-action="next" aria-label="Next photo">
-			<span aria-hidden="true">&#8250;</span>
-		</button>
-	</dialog>
-
 	<Footer />
 </Layout>
-
-<script>
-	function initGalleryLightbox() {
-		const dialog = document.querySelector<HTMLDialogElement>('#gallery-lightbox');
-		const triggers = [...document.querySelectorAll<HTMLButtonElement>('.photo-trigger')];
-		if (!dialog || triggers.length === 0) return;
-
-		const image = dialog.querySelector<HTMLImageElement>('.lightbox-image');
-		const creditEl = dialog.querySelector<HTMLAnchorElement>('.lightbox-credit');
-		const closeBtn = dialog.querySelector<HTMLButtonElement>('.lightbox-close');
-		const prevBtn = dialog.querySelector<HTMLButtonElement>('[data-action="prev"]');
-		const nextBtn = dialog.querySelector<HTMLButtonElement>('[data-action="next"]');
-		if (!image || !creditEl) return;
-
-		let currentIndex = 0;
-
-		function show(index: number) {
-			const trigger = triggers[index];
-			if (!trigger || !image || !creditEl) return;
-
-			currentIndex = index;
-			image.src = trigger.dataset.src ?? '';
-			image.alt = trigger.dataset.alt ?? '';
-			image.width = Number(trigger.dataset.width) || 1600;
-			image.height = Number(trigger.dataset.height) || 1200;
-
-			const creditName = trigger.dataset.credit ?? '';
-			const creditHref = trigger.dataset.creditHref ?? '';
-			creditEl.textContent = creditName ? `Photo: ${creditName}` : '';
-			if (creditHref) {
-				creditEl.href = creditHref;
-				creditEl.removeAttribute('hidden');
-			} else {
-				creditEl.removeAttribute('href');
-				creditEl.setAttribute('hidden', '');
-			}
-		}
-
-		function open(index: number) {
-			show(index);
-			dialog.showModal();
-			document.body.style.overflow = 'hidden';
-		}
-
-		function close() {
-			if (!dialog.open) return;
-			dialog.close();
-		}
-
-		function step(delta: number) {
-			const nextIndex = (currentIndex + delta + triggers.length) % triggers.length;
-			show(nextIndex);
-		}
-
-		triggers.forEach((trigger, index) => {
-			trigger.addEventListener('click', () => open(index));
-		});
-
-		closeBtn?.addEventListener('click', close);
-		prevBtn?.addEventListener('click', () => step(-1));
-		nextBtn?.addEventListener('click', () => step(1));
-
-		dialog.addEventListener('click', (event) => {
-			if (event.target === dialog) close();
-		});
-
-		dialog.addEventListener('close', () => {
-			document.body.style.overflow = '';
-			image.removeAttribute('src');
-		});
-
-		document.addEventListener('keydown', (event) => {
-			if (!dialog.open) return;
-			if (event.key === 'ArrowLeft') {
-				event.preventDefault();
-				step(-1);
-			} else if (event.key === 'ArrowRight') {
-				event.preventDefault();
-				step(1);
-			}
-		});
-	}
-
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initGalleryLightbox);
-	} else {
-		initGalleryLightbox();
-	}
-</script>
 
 <style>
 	main {
@@ -335,185 +230,104 @@ const photos = await getGalleryPhotos();
 		margin-top: 0.85rem;
 	}
 
-	.photographer-credits {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem 1.5rem;
+	.photographer-covers {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.5rem;
 		list-style: none;
-		margin: 0 0 2rem;
-		padding: 1rem 1.25rem;
-		background: var(--card-background);
-		border: 1px solid var(--border-color);
-		border-radius: 12px;
+		margin: 0;
+		padding: 0;
 	}
 
-	.photographer-credits li {
+	.cover-card {
 		display: flex;
-		flex-wrap: wrap;
-		align-items: baseline;
-		gap: 0.4rem 0.75rem;
+		flex-direction: column;
+		gap: 0.75rem;
 	}
 
-	.photographer-name {
-		font-weight: 600;
-		color: var(--text-primary);
-	}
-
-	.photographer-credits a {
-		font-size: 0.95rem;
-	}
-
-	.photo-grid {
-		column-count: 3;
-		column-gap: 1.25rem;
-	}
-
-	.photo-card {
-		margin: 0 0 1.25rem;
-		break-inside: avoid;
-		page-break-inside: avoid;
-		-webkit-column-break-inside: avoid;
-	}
-
-	.photo-trigger {
+	.cover-media {
 		position: relative;
 		display: block;
-		width: 100%;
-		padding: 0;
-		border: 0;
+		aspect-ratio: 16 / 10;
 		border-radius: 12px;
 		overflow: hidden;
 		background: var(--card-background);
-		cursor: zoom-in;
+		border: 1px solid var(--border-color);
 		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+		text-decoration: none;
+		color: inherit;
 	}
 
-	.photo-trigger:focus-visible {
+	a.cover-media:hover :global(img),
+	a.cover-media:focus-visible :global(img) {
+		transform: scale(1.03);
+	}
+
+	a.cover-media:focus-visible {
 		outline: 3px solid var(--primary-color);
 		outline-offset: 3px;
 	}
 
-	.photo-trigger :global(img) {
+	.cover-media :global(picture) {
 		width: 100%;
-		height: auto;
+		height: 100%;
 		display: block;
 	}
 
-	.photo-credit {
+	.cover-media :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.4s ease;
+	}
+
+	.cover-placeholder {
+		width: 100%;
+		height: 100%;
+		background:
+			linear-gradient(135deg, rgba(205, 213, 174, 0.12) 0%, rgba(34, 51, 59, 0.9) 100%);
+	}
+
+	.cover-overlay {
 		position: absolute;
-		left: 0.6rem;
-		right: 0.6rem;
-		bottom: 0.6rem;
-		padding: 0.3rem 0.55rem;
-		border-radius: 6px;
-		background: rgba(34, 51, 59, 0.82);
-		color: var(--primary-color);
-		font-size: 0.75rem;
-		font-weight: 600;
-		text-align: left;
+		inset: 0;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		gap: 0.4rem;
+		padding: 1.15rem 1.2rem;
+		background: linear-gradient(180deg, rgba(34, 51, 59, 0.05) 35%, rgba(34, 51, 59, 0.82) 100%);
 		pointer-events: none;
 	}
 
-	.empty-state {
-		color: var(--text-secondary);
+	.cover-name {
+		font-size: 1.45rem;
+		font-weight: 600;
+		color: var(--primary-color);
+		line-height: 1.2;
 	}
 
-	.lightbox {
-		max-width: min(96vw, 1400px);
-		max-height: 96vh;
-		width: 100%;
-		margin: auto;
-		padding: 3.5rem 4.25rem 1.25rem;
+	.cover-badge {
+		display: inline-block;
+		align-self: flex-start;
+		padding: 0.25rem 0.6rem;
+		border-radius: 6px;
+		background: rgba(34, 51, 59, 0.82);
 		border: 1px solid var(--border-color);
-		border-radius: 16px;
-		background: rgba(34, 51, 59, 0.96);
-		color: var(--text-primary);
-	}
-
-	.lightbox::backdrop {
-		background: rgba(0, 0, 0, 0.78);
-	}
-
-	.lightbox-figure {
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.75rem;
-		min-height: 0;
-	}
-
-	.lightbox-image {
-		max-width: 100%;
-		max-height: calc(96vh - 8rem);
-		width: auto;
-		height: auto;
-		object-fit: contain;
-		border-radius: 8px;
-	}
-
-	.lightbox-caption {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-	}
-
-	.lightbox-credit {
-		font-size: 0.85rem;
+		color: var(--text-secondary);
+		font-size: 0.8rem;
 		font-weight: 600;
 	}
 
-	.lightbox-close,
-	.lightbox-nav {
-		position: absolute;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		min-width: 44px;
-		min-height: 44px;
-		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.08);
-		color: var(--primary-color);
-		border: 1px solid var(--border-color);
+	.cover-credit {
+		font-size: 0.95rem;
+		padding-left: 0.15rem;
 	}
 
-	.lightbox-close:hover,
-	.lightbox-nav:hover {
-		background: rgba(205, 213, 174, 0.18);
-	}
-
-	.lightbox-close {
-		top: 0.75rem;
-		right: 0.75rem;
-		font-size: 1.75rem;
-		line-height: 1;
-	}
-
-	.lightbox-nav {
-		top: 50%;
-		transform: translateY(-50%);
-		font-size: 2rem;
-		line-height: 1;
-	}
-
-	.lightbox-prev {
-		left: 0.6rem;
-	}
-
-	.lightbox-next {
-		right: 0.6rem;
-	}
-
-	@media (max-width: 1024px) {
-		.photo-grid {
-			column-count: 2;
-			column-gap: 1rem;
-		}
-
-		.photo-card {
-			margin-bottom: 1rem;
-		}
+	.is-soon .cover-media {
+		cursor: default;
 	}
 
 	@media (max-width: 768px) {
@@ -547,41 +361,17 @@ const photos = await getGalleryPhotos();
 			font-size: 1rem;
 		}
 
-		.lightbox {
-			max-width: 100vw;
-			max-height: 100vh;
-			width: 100%;
-			height: 100%;
-			margin: 0;
-			padding: 4rem 0.75rem 1.25rem;
-			border-radius: 0;
-			border: 0;
+		.photographer-covers {
+			grid-template-columns: 1fr;
+			gap: 1.25rem;
 		}
 
-		.lightbox-image {
-			max-height: calc(100vh - 8.5rem);
-		}
-
-		.lightbox-nav {
-			top: auto;
-			bottom: 0.85rem;
-			transform: none;
-		}
-
-		.lightbox-prev {
-			left: 0.75rem;
-		}
-
-		.lightbox-next {
-			right: 0.75rem;
+		.cover-name {
+			font-size: 1.25rem;
 		}
 	}
 
 	@media (max-width: 640px) {
-		.photo-grid {
-			column-count: 1;
-		}
-
 		.hero-banner {
 			height: 240px;
 		}
