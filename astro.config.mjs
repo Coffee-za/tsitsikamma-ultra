@@ -6,6 +6,17 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
 	// Replace with your live domain, including protocol, no trailing slash
 	site: 'https://tsitsikammaultra.co.za',
+	image: {
+		service: {
+			entrypoint: 'astro/assets/services/sharp',
+			config: {
+				jpeg: { quality: 90 },
+				webp: { quality: 90 },
+				avif: { quality: 90 },
+				png: { quality: 90 },
+			},
+		},
+	},
 	integrations: [
 		sitemap({
 			filter: (page) => {
