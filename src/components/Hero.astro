@@ -1,8 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import BannerPicture from './BannerPicture.astro';
 import { getHeroImages } from '../lib/hero-images';
-import logoImage from '../assets/logos/ultra-logo.webp';
 
 const hero = await getHeroImages();
 ---
@@ -21,7 +19,7 @@ const hero = await getHeroImages();
 	<div class="container">
 		<div class="hero-content">
 			<div class="hero-logo">
-				<Image src={logoImage} alt="Tsitsikamma Ultra Logo" class="logo" width={300} densities={[1, 2]} loading="eager" />
+				<img src="/Logo_2027.png" alt="Tsitsikamma Ultra Logo" class="logo" width="300" height="300" loading="eager" />
 			</div>
 			<h1 class="hero-title">2027 Loading...</h1>
 			<p class="hero-subtitle">Run Like The Trees Are Cheering</p>
