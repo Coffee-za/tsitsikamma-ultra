@@ -2,22 +2,18 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import trailLogo from '../assets/logos/trail-shop.webp';
-import guLogo from '../assets/logos/gu-energy.webp';
 import mtoLogo from '../assets/logos/mto-trail.webp';
 import muddyLogo from '../assets/logos/muddy-foot.webp';
 import ppLogo from '../assets/logos/plett-pixels.webp';
-import salomonLogo from '../assets/logos/salomon.webp';
 import soxLogo from '../assets/logos/sox.webp';
 import nnormalLogo from '../assets/logos/nnormal.webp';
 import silvaLogo from '../assets/logos/silva.webp';
 
 const sponsors: { src: ImageMetadata; alt: string; href: string; enlarge?: boolean }[] = [
 	{ src: trailLogo, alt: 'The Trail Shop Logo', href: 'https://www.thebikeshop.co.za/' },
-	{ src: guLogo, alt: 'GU Energy Logo', href: 'https://guenergy.co.za/' },
 	{ src: mtoLogo, alt: 'MTO Trail Logo', href: 'https://www.mtotrails.com/' },
 	{ src: muddyLogo, alt: 'Muddy Foot Adventures Logo', href: 'https://facebook.com/muddyfootadventures/' },
 	{ src: ppLogo, alt: 'Plett Pixels Logo', href: 'https://plettpixels.com/' },
-	{ src: salomonLogo, alt: 'Salomon Logo', href: 'https://salomonsports.co.za/' },
 	{ src: soxLogo, alt: 'Sox Logo', href: 'https://soxfootwear.co.za/' },
 	{ src: nnormalLogo, alt: 'NNormal Logo', href: 'https://www.nnormal.com/', enlarge: true },
 	{ src: silvaLogo, alt: 'SILVA Logo', href: 'https://silva.se/', enlarge: true },
@@ -62,7 +58,7 @@ const carouselSponsors = [...sponsors, ...sponsors];
 		display: flex;
 		align-items: center;
 		animation: scroll 30s linear infinite;
-		width: calc(250px * 18 + 3rem * 18); /* 18 logos with gaps */
+		width: calc(250px * 14 + 3rem * 14); /* 14 logos with gaps */
 	}
 
 	.sponsor-logo {
@@ -120,7 +116,7 @@ const carouselSponsors = [...sponsors, ...sponsors];
 			transform: translateX(0);
 		}
 		100% {
-			transform: translateX(calc(-250px * 9 - 3rem * 9)); /* Move by width of 9 logos */
+			transform: translateX(calc(-250px * 7 - 3rem * 7)); /* Move by width of 7 logos */
 		}
 	}
 
@@ -138,7 +134,7 @@ const carouselSponsors = [...sponsors, ...sponsors];
 		}
 
 		.sponsors-track {
-			width: calc(180px * 18 + 2rem * 18);
+			width: calc(180px * 14 + 2rem * 14);
 		}
 
 		@keyframes scroll {
@@ -146,7 +142,7 @@ const carouselSponsors = [...sponsors, ...sponsors];
 				transform: translateX(0);
 			}
 			100% {
-				transform: translateX(calc(-180px * 9 - 2rem * 9));
+				transform: translateX(calc(-180px * 7 - 2rem * 7));
 			}
 		}
 	}
