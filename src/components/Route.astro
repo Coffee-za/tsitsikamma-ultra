@@ -1,5 +1,6 @@
 ---
 import elevationGraph from '../assets/photos/route-elevation.svg';
+import elevationGraph30km from '../assets/photos/route-elevation-30km.svg';
 import rulerIcon from '../assets/icons/ruler.svg';
 import mountainsIcon from '../assets/icons/mountains.svg';
 import timerIcon from '../assets/icons/timer.svg';
@@ -9,10 +10,11 @@ import aidStationIcon from '../assets/icons/aid-station.svg';
 <section id="route" class="section route">
 	<div class="container">
 		<h2 class="section-title">The Route</h2>
+		
 		<div class="elevation-chart-container card">
-			<h3>Elevation Profile</h3>
+			<h3>Ultra 50km Elevation Profile</h3>
 			<div class="elevation-scroll">
-				<img src={elevationGraph.src} alt="Elevation profile of the 50km route, with aid stations, water points, and the beer point marked along the distance." class="elevation-image" width={elevationGraph.width} height={elevationGraph.height} />
+				<img src={elevationGraph.src} alt="Elevation profile of the 50km Ultra route, with aid stations, water points, and the beer point marked along the distance." class="elevation-image" width={elevationGraph.width} height={elevationGraph.height} />
 			</div>
 			<div class="chart-info">
 				<div class="chart-stat">
@@ -45,6 +47,43 @@ import aidStationIcon from '../assets/icons/aid-station.svg';
 				</div>
 			</div>
 		</div>
+
+		<div class="elevation-chart-container card">
+			<h3>Lite 30km Elevation Profile</h3>
+			<div class="elevation-scroll">
+				<img src={elevationGraph30km.src} alt="Elevation profile of the 30km Lite route, with aid stations marked at 9km and 20km along the distance." class="elevation-image" width={elevationGraph30km.width} height={elevationGraph30km.height} />
+			</div>
+			<div class="chart-info">
+				<div class="chart-stat">
+					<div class="stat-icon">
+						<img src={rulerIcon.src} alt="" aria-hidden="true" width="24" height="24" />
+					</div>
+					<span class="stat-value">Distance</span>
+					<span class="stat-desc">31km</span>
+				</div>
+				<div class="chart-stat">
+					<div class="stat-icon">
+						<img src={mountainsIcon.src} alt="" aria-hidden="true" width="24" height="24" />
+					</div>
+					<span class="stat-value">Elevation Gain</span>
+					<span class="stat-desc">1,043m</span>
+				</div>
+				<div class="chart-stat">
+					<div class="stat-icon">
+						<img src={timerIcon.src} alt="" aria-hidden="true" width="24" height="24" />
+					</div>
+					<span class="stat-value">Cut-off Time</span>
+					<span class="stat-desc">9 hours</span>
+				</div>
+				<div class="chart-stat">
+					<div class="stat-icon">
+						<img src={aidStationIcon.src} alt="" aria-hidden="true" width="24" height="24" />
+					</div>
+					<span class="stat-value">Aid Stations</span>
+					<span class="stat-desc">2</span>
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
 
@@ -57,6 +96,10 @@ import aidStationIcon from '../assets/icons/aid-station.svg';
 	.elevation-chart-container {
 		position: relative;
 		width: 100%;
+	}
+
+	.elevation-chart-container + .elevation-chart-container {
+		margin-top: 2.5rem;
 	}
 
 	.elevation-chart-container h3 {
