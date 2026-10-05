@@ -12,7 +12,8 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
-					<p>The official cut-off time is 12 hours from the start. There is an intermediate cut-off at Keurbos (13:00) to ensure runner safety and race logistics.</p>
+					<p><strong>50km:</strong> 12 hours from the start. Intermediate cut-offs are Heuningbos at 09:30 and Keurbos at 13:00.</p>
+					<p><strong>30km:</strong> 9 hours from the start. Intermediate cut-off is Bloukrans at 12:30.</p>
 				</div>
 			</div>
 
@@ -42,7 +43,9 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
-					<p>There are 2 fully stocked aid stations positioned at the 29km and 40km mark. Each provides water, Drink Mix (GU), Bananas. Oranges, Snacks and Race Nutrition (GU). Basic first aid supplies. <br>  <br>Additional water is available from Sleepkloof Hut (4km) & Heuningbos Hut (15km) and natural Mountain Sources</p>
+					<p><strong>50km:</strong> 3 fully stocked aid stations. Heuningbos Hut (15km), Keurbos Hut (29km) and Bloukrans Hut (40km). Each provides water, Drink Mix (GU), bananas, oranges, snacks and race nutrition (GU), plus basic first aid supplies.</p>
+					<p><strong>30km:</strong> 2 aid stations, at 9km and 20km.</p>
+					<p>Additional water is available from Sleepkloof Hut (4km) and natural mountain sources.</p>
 				</div>
 			</div>
 
@@ -52,7 +55,9 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
-					<p>A shuttle service will be available from Covie to the start in Stormsriver. Bookings for the Shuttle Service must be made in advance with your race entry on the ticket platform (Add On). <br>Parking: Available at the Finish area in Covie. <br>Toilets: Located at the start, aid station 1, aid station 2 & the finish.</p>
+					<p><strong>50km:</strong> A shuttle service will be available from Covie to the start in Stormsriver. Bookings for the Shuttle Service must be made in advance with your race entry on the ticket platform (Add On).</p>
+					<p><strong>30km:</strong> Runners must get themselves to the start at Lottering Forestry Station.</p>
+					<p>Parking: Available at the Finish area in Covie.<br>Toilets: Located at the start, the aid stations and the finish.</p>
 				</div>
 			</div>
 
@@ -62,7 +67,8 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
-					<p>Entry includes: All conservation and forestry permits, The Trail Shop Running Shirt, Socks, Finishers Medal, Refreshment & Burger at the finish line.</p>
+					<p><strong>50km:</strong> Entry includes all conservation and forestry permits, The Trail Shop Running Shirt, socks, a finisher’s medal, and a refreshment and burger at the finish line.</p>
+					<p><strong>30km:</strong> No shirt and no meal. See the ticket platform for extra info.</p>
 				</div>
 			</div>
 
@@ -72,7 +78,7 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
-					<p>There are plenty of options available in the area on AirBnB, Booking.com, etc. Natures Valley is the closest area to the parking lot/finish line in Covie.</p>
+					<p>There are plenty of options available in the area on AirBnB, Booking.com, etc. Natures Valley is the closest area to the finish line in Covie.</p>
 				</div>
 			</div>
 		</div>
@@ -197,10 +203,18 @@
 	}
 
 	.faq-answer p {
-		padding: 0 1.5rem 1.5rem 1.5rem;
+		padding: 0 1.5rem 1rem 1.5rem;
 		color: var(--text-secondary);
 		line-height: 1.6;
 		margin: 0;
+	}
+
+	.faq-answer p:last-child {
+		padding-bottom: 1.5rem;
+	}
+
+	.faq-answer strong {
+		color: var(--text-primary);
 	}
 
 	@media (max-width: 768px) {
@@ -210,7 +224,11 @@
 		}
 
 		.faq-answer p {
-			padding: 0 1.25rem 1.25rem 1.25rem;
+			padding: 0 1.25rem 1rem 1.25rem;
+		}
+
+		.faq-answer p:last-child {
+			padding-bottom: 1.25rem;
 		}
 	}
 </style>

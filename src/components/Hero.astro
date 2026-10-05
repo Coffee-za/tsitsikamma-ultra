@@ -21,11 +21,10 @@ const hero = await getHeroImages();
 			<div class="hero-logo">
 				<img src="/Logo_2027.png" alt="Tsitsikamma Ultra Logo" class="logo" width="300" height="300" loading="eager" />
 			</div>
-			<h1 class="hero-title">2027 Loading...</h1>
+			<h1 class="hero-title">Tsitsikamma Ultra/Lite 2027</h1>
 			<p class="hero-subtitle">Run Like The Trees Are Cheering</p>
-			<p class="hero-date">Ticket Sales Open 25th September 2026</p>
 			<div class="hero-actions">
-				<a href="https://wldr.howler.co.za/events/tsitsikamma-ultra-2027-6f58" data-umami-event="enter-race-click" class="btn btn-primary" target="_blank">Enter Race</a>
+				<a href="https://wldr.howler.co.za/tsitsikammarun2027" data-umami-event="enter-race-click" class="btn btn-primary" target="_blank">Enter Race</a>
 				<a href="#about" class="btn btn-outline">Learn More</a>
 			</div>
 		</div>
@@ -118,31 +117,22 @@ const hero = await getHeroImages();
 	}
 
 	.hero-title {
-		font-size: 3.5rem;
+		font-size: clamp(1.75rem, 4.5vw, 2.75rem);
 		font-weight: 700;
 		margin-bottom: 1rem;
 		color: #FFFFFF;
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 		animation: fadeInUp 1s ease-out 0.2s both;
+		line-height: 1.15;
 	}
 
 	.hero-subtitle {
 		font-size: 1.5rem;
 		font-weight: 400;
-		margin-bottom: 1rem;
+		margin-bottom: 2rem;
 		color: var(--primary-color);
 		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 		animation: fadeInUp 1s ease-out 0.3s both;
-	}
-
-	.hero-date {
-		font-size: 1.125rem;
-		font-weight: 700;
-		font-family: 'EB Garamond', serif;
-		margin-bottom: 2rem;
-		color: #FFFFFF;
-		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-		animation: fadeInUp 1s ease-out 0.35s both;
 	}
 
 	.hero-actions {
@@ -169,16 +159,8 @@ const hero = await getHeroImages();
 			max-width: 250px;
 		}
 
-		.hero-title {
-			font-size: 2.25rem;
-		}
-
 		.hero-subtitle {
 			font-size: 1.25rem;
-		}
-
-		.hero-date {
-			font-size: 1rem;
 		}
 
 		.hero-actions {
