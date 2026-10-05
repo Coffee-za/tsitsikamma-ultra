@@ -28,7 +28,10 @@ export const photographers: GalleryPhotographer[] = [
 	},
 ];
 
-export const photoAlts: Record<string, string> = {};
+export const photoAlts: Record<string, string> = {
+	'Tsitsikamma Ultra_Carmen Claire Photography20.jpg': 'Solo runner crouching at a rocky stream - Photo: Carmen Claire',
+	'Tsitsikamma Ultra_Carmen Claire Photography14.jpg': 'Two trail runners crossing a rocky riverbed in front of a waterfall - Photo: Carmen Claire',
+};
 
 export const photoOrder = Object.keys(photoAlts);
 
