@@ -36,9 +36,18 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 
 		<section class="section strava-section">
 			<div class="container">
-				<h2 class="section-title">Official Race Route</h2>
+				<h2 class="section-title">Official Race Routes</h2>
+				<h3 class="route-label">50km Ultra</h3>
 				<div class="strava-container">
 					<div class="strava-embed-placeholder" data-embed-type="route" data-embed-id="3522158146818965166" data-full-width="true" data-style="hybrid" data-map-hash="9.9/-33.9336/23.7656" data-from-embed="true">
+						<div style="width: 100%; height: 400px; background: var(--card-background); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+							Loading Strava route...
+						</div>
+					</div>
+				</div>
+				<h3 class="route-label">30km Lite</h3>
+				<div class="strava-container">
+					<div class="strava-embed-placeholder" data-embed-type="route" data-embed-id="3514274566687394442" data-full-width="true" data-style="hybrid" data-map-hash="9.9/-33.9336/23.7656" data-from-embed="true">
 						<div style="width: 100%; height: 400px; background: var(--card-background); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
 							Loading Strava route...
 						</div>
@@ -138,6 +147,7 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 						</button>
 						<div class="accordion-answer">
 							<div class="accordion-content">
+								<div class="accordion-body">
 								<h4>Race Entry & Registration</h4>
 								<ul>
 									<li>Entry fees are non-refundable except in cases of race cancellation due to circumstances beyond our control</li>
@@ -166,6 +176,7 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 									<li>Littering will result in immediate disqualification</li>
 									<li>Follow all instructions from race officials and marshals</li>
 								</ul>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -177,6 +188,7 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 						</button>
 						<div class="accordion-answer">
 							<div class="accordion-content">
+								<div class="accordion-body">
 								<h4>Mandatory Equipment</h4>
 								<p class="gear-warning">Mandatory Gear will be checked at registration & at the finish. Severe penalty for not carrying compulsory gear (DNF).</p>
 								
@@ -216,6 +228,7 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 									<li>GPS navigation watch</li>
 									<li>Sunglasses and sunscreen</li>
 								</ul>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -227,6 +240,7 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 						</button>
 						<div class="accordion-answer">
 							<div class="accordion-content">
+								<div class="accordion-body">
 								<h4>General Rules</h4>
 								<ul>
 									<li>Follow the marked route at all times - shortcuts will result in disqualification</li>
@@ -299,6 +313,7 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 									<li>Missing cut-off times</li>
 									<li>Leaving the marked course</li>
 								</ul>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -315,37 +330,30 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 		
 		accordionItems.forEach(item => {
 			const question = item.querySelector('.accordion-question');
-			const answer = item.querySelector('.accordion-answer');
 			const icon = item.querySelector('.accordion-icon');
 			
-			if (!question || !answer || !icon) return;
+			if (!question || !icon) return;
 			
 			question.addEventListener('click', () => {
 				const isExpanded = question.getAttribute('aria-expanded') === 'true';
 				
-				// Close all other items
 				accordionItems.forEach(otherItem => {
 					const otherQuestion = otherItem.querySelector('.accordion-question');
-					const otherAnswer = otherItem.querySelector('.accordion-answer');
 					const otherIcon = otherItem.querySelector('.accordion-icon');
 					
-					if (otherItem !== item && otherQuestion && otherAnswer && otherIcon) {
+					if (otherItem !== item && otherQuestion && otherIcon) {
 						otherQuestion.setAttribute('aria-expanded', 'false');
-						otherAnswer.style.maxHeight = '0';
 						otherIcon.textContent = '+';
 						otherItem.classList.remove('active');
 					}
 				});
 				
-				// Toggle current item
 				if (isExpanded) {
 					question.setAttribute('aria-expanded', 'false');
-					answer.style.maxHeight = '0';
 					icon.textContent = '+';
 					item.classList.remove('active');
 				} else {
 					question.setAttribute('aria-expanded', 'true');
-					answer.style.maxHeight = answer.scrollHeight + 'px';
 					icon.textContent = '−';
 					item.classList.add('active');
 				}
@@ -500,7 +508,7 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 		border-radius: 12px;
 		margin-bottom: 1rem;
 		overflow: hidden;
-		transition: all 0.3s ease;
+		transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
 	}
 
 	.accordion-item:hover {
@@ -525,7 +533,7 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 		text-align: left;
 		border: none;
 		cursor: pointer;
-		transition: all 0.2s ease;
+		transition: background-color 200ms var(--ease-out), border-color 200ms var(--ease-out);
 	}
 
 	.accordion-question:hover {
@@ -536,7 +544,7 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 		font-size: 1.5rem;
 		color: var(--primary-color);
 		font-weight: 300;
-		transition: transform 0.3s ease;
+		transition: transform 160ms var(--ease-out);
 	}
 
 	.accordion-item.active .accordion-icon {
@@ -544,12 +552,21 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 	}
 
 	.accordion-answer {
-		max-height: 0;
-		overflow: hidden;
-		transition: max-height 0.3s ease;
+		display: grid;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 250ms var(--ease-out);
+	}
+
+	.accordion-item.active .accordion-answer {
+		grid-template-rows: 1fr;
 	}
 
 	.accordion-content {
+		overflow: hidden;
+		min-height: 0;
+	}
+
+	.accordion-body {
 		padding: 0 1.5rem 1.5rem 1.5rem;
 		color: var(--text-secondary);
 		line-height: 1.6;
@@ -732,7 +749,7 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 			font-size: 1.125rem;
 		}
 
-		.accordion-content {
+		.accordion-body {
 			padding: 0 1.25rem 1.25rem 1.25rem;
 		}
 
@@ -751,6 +768,18 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 	.strava-section {
 		background: rgba(255, 255, 255, 0.02);
 		padding: 3rem 0;
+	}
+
+	.route-label {
+		color: var(--primary-color);
+		font-size: 1.25rem;
+		font-weight: 600;
+		text-align: center;
+		margin: 0 0 1rem;
+	}
+
+	.route-label + .strava-container + .route-label {
+		margin-top: 2.5rem;
 	}
 
 	.strava-container {

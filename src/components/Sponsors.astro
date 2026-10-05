@@ -77,11 +77,23 @@ const carouselSponsors = [...sponsors, ...sponsors];
 		border-radius: 8px;
 		padding: 0.5rem;
 		overflow: hidden;
-		transition: transform 0.3s ease;
+		transition: transform 200ms var(--ease-out);
 	}
 
-	.sponsor-logo:hover {
-		transform: scale(1.05);
+	@media (hover: hover) and (pointer: fine) {
+		.sponsor-logo:hover {
+			transform: scale(1.05);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.sponsors-track {
+			animation: none;
+		}
+
+		.sponsor-logo:hover {
+			transform: none;
+		}
 	}
 
 	.sponsor-logo a {

@@ -130,6 +130,8 @@ const heroImages = isHome ? await getHeroImages() : null;
 		--success-color: #10B981;
 		--warning-color: #F59E0B;
 		--danger-color: #EF4444;
+		--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+		--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 	}
 
 	*,
@@ -181,7 +183,7 @@ const heroImages = isHome ? await getHeroImages() : null;
 		font-size: inherit;
 		border: none;
 		cursor: pointer;
-		transition: all 0.2s ease;
+		transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out), border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out), transform 200ms var(--ease-out);
 	}
 
 	.container {
@@ -199,7 +201,7 @@ const heroImages = isHome ? await getHeroImages() : null;
 		border-radius: 8px;
 		font-weight: 500;
 		text-decoration: none;
-		transition: all 0.2s ease;
+		transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out), border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out), transform 200ms var(--ease-out);
 		border: 2px solid transparent;
 	}
 
@@ -212,7 +214,6 @@ const heroImages = isHome ? await getHeroImages() : null;
 	.btn-primary:hover {
 		background-color: var(--accent-color);
 		color: var(--background-color);
-		transform: translateY(-2px);
 		box-shadow: 0 6px 20px rgba(205, 213, 174, 0.4);
 	}
 
@@ -244,13 +245,28 @@ const heroImages = isHome ? await getHeroImages() : null;
 		border: 1px solid var(--border-color);
 		border-radius: 12px;
 		padding: 2rem;
-		transition: all 0.3s ease;
+		transition: background-color 250ms var(--ease-out), color 250ms var(--ease-out), border-color 250ms var(--ease-out), box-shadow 250ms var(--ease-out), transform 250ms var(--ease-out);
 	}
 
 	.card:hover {
-		transform: translateY(-4px);
 		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 		border-color: var(--primary-color);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.btn-primary:hover {
+			transform: translateY(-2px);
+		}
+
+		.card:hover {
+			transform: translateY(-4px);
+		}
+	}
+
+	.btn:active,
+	button:active {
+		transform: scale(0.97);
+		transition-duration: 160ms;
 	}
 
 	@media (max-width: 768px) {
@@ -265,6 +281,30 @@ const heroImages = isHome ? await getHeroImages() : null;
 		
 		.btn {
 			padding: 0.875rem 1.5rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero-logo,
+		.hero-title,
+		.hero-subtitle,
+		.hero-actions,
+		.gallery-item {
+			animation: none !important;
+			opacity: 1 !important;
+			transform: none !important;
+		}
+
+		.sponsors-track {
+			animation: none !important;
+		}
+
+		.btn-primary:hover,
+		.btn:active,
+		button:active,
+		.card:hover,
+		.sponsor-logo:hover {
+			transform: none;
 		}
 	}
 </style>

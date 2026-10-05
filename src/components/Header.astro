@@ -93,7 +93,7 @@
 		background: rgba(34, 51, 59, 0.95);
 		backdrop-filter: blur(10px);
 		border-bottom: 1px solid var(--border-color);
-		transition: all 0.3s ease;
+		transition: background-color 200ms var(--ease-out);
 	}
 
 	.header.menu-open {
@@ -172,7 +172,7 @@
 		height: 3px;
 		background-color: var(--primary-color);
 		border-radius: 2px;
-		transition: all 0.3s ease;
+		transition: transform 160ms var(--ease-out), opacity 160ms var(--ease-out);
 	}
 
 	.mobile-menu-toggle.active span:nth-child(1) {
@@ -200,7 +200,7 @@
 		opacity: 0;
 		pointer-events: none; /* Prevent invisible menu from blocking clicks */
 		z-index: 1001; /* Ensure it overlays content when open */
-		transition: all 0.3s ease;
+		transition: transform 250ms var(--ease-out), opacity 250ms var(--ease-out);
 	}
 
 	.mobile-menu.active {

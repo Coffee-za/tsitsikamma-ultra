@@ -107,7 +107,7 @@ const hero = await getHeroImages();
 
 	.hero-logo {
 		margin-bottom: 2rem;
-		animation: fadeInUp 1s ease-out;
+		animation: fadeInUp 600ms var(--ease-out);
 	}
 
 	.hero-logo .logo {
@@ -122,7 +122,7 @@ const hero = await getHeroImages();
 		margin-bottom: 1rem;
 		color: #FFFFFF;
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-		animation: fadeInUp 1s ease-out 0.2s both;
+		animation: fadeInUp 600ms var(--ease-out) 50ms both;
 		line-height: 1.15;
 	}
 
@@ -132,7 +132,7 @@ const hero = await getHeroImages();
 		margin-bottom: 2rem;
 		color: var(--primary-color);
 		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-		animation: fadeInUp 1s ease-out 0.3s both;
+		animation: fadeInUp 600ms var(--ease-out) 100ms both;
 	}
 
 	.hero-actions {
@@ -140,7 +140,7 @@ const hero = await getHeroImages();
 		gap: 1rem;
 		justify-content: center;
 		flex-wrap: wrap;
-		animation: fadeInUp 1s ease-out 0.4s both;
+		animation: fadeInUp 600ms var(--ease-out) 150ms both;
 	}
 
 	@keyframes fadeInUp {

@@ -12,8 +12,10 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
+					<div class="faq-answer-inner">
 					<p><strong>50km:</strong> 12 hours from the start. Intermediate cut-offs are Heuningbos at 09:30 and Keurbos at 13:00.</p>
 					<p><strong>30km:</strong> 9 hours from the start. Intermediate cut-off is Bloukrans at 12:30.</p>
+					</div>
 				</div>
 			</div>
 
@@ -23,7 +25,9 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
+					<div class="faq-answer-inner">
 					<p>The route includes single track trails, coastal paths, forests, stream crossings, and some gravel road sections. Expect technical terrain with roots, rocks, and varying surface conditions.</p>
+					</div>
 				</div>
 			</div>
 
@@ -33,7 +37,9 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
+					<div class="faq-answer-inner">
 					<p>Yes, For the full list please visit the <a href="/runners-guide">Runners Guide</a> page.</p>
+					</div>
 				</div>
 			</div>
 
@@ -43,9 +49,11 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
+					<div class="faq-answer-inner">
 					<p><strong>50km:</strong> 3 fully stocked aid stations. Heuningbos Hut (15km), Keurbos Hut (29km) and Bloukrans Hut (40km). Each provides water, Drink Mix (GU), bananas, oranges, snacks and race nutrition (GU), plus basic first aid supplies.</p>
 					<p><strong>30km:</strong> 2 aid stations, at 9km and 20km.</p>
 					<p>Additional water is available from Sleepkloof Hut (4km) and natural mountain sources.</p>
+					</div>
 				</div>
 			</div>
 
@@ -55,9 +63,11 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
+					<div class="faq-answer-inner">
 					<p><strong>50km:</strong> A shuttle service will be available from Covie to the start in Stormsriver. Bookings for the Shuttle Service must be made in advance with your race entry on the ticket platform (Add On).</p>
 					<p><strong>30km:</strong> Runners must get themselves to the start at Lottering Forestry Station.</p>
 					<p>Parking: Available at the Finish area in Covie.<br>Toilets: Located at the start, the aid stations and the finish.</p>
+					</div>
 				</div>
 			</div>
 
@@ -67,8 +77,10 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
+					<div class="faq-answer-inner">
 					<p><strong>50km:</strong> Entry includes all conservation and forestry permits, The Trail Shop Running Shirt, socks, a finisher’s medal, and a refreshment and burger at the finish line.</p>
 					<p><strong>30km:</strong> No shirt and no meal. See the ticket platform for extra info.</p>
+					</div>
 				</div>
 			</div>
 
@@ -78,7 +90,9 @@
 					<span class="faq-icon">+</span>
 				</button>
 				<div class="faq-answer">
+					<div class="faq-answer-inner">
 					<p>There are plenty of options available in the area on AirBnB, Booking.com, etc. Natures Valley is the closest area to the finish line in Covie.</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -91,37 +105,30 @@
 		
 		faqItems.forEach(item => {
 			const question = item.querySelector('.faq-question');
-			const answer = item.querySelector('.faq-answer');
 			const icon = item.querySelector('.faq-icon');
 			
-			if (!question || !answer || !icon) return;
+			if (!question || !icon) return;
 			
 			question.addEventListener('click', () => {
 				const isExpanded = question.getAttribute('aria-expanded') === 'true';
 				
-				// Close all other items
 				faqItems.forEach(otherItem => {
 					const otherQuestion = otherItem.querySelector('.faq-question');
-					const otherAnswer = otherItem.querySelector('.faq-answer');
 					const otherIcon = otherItem.querySelector('.faq-icon');
 					
-					if (otherItem !== item && otherQuestion && otherAnswer && otherIcon) {
+					if (otherItem !== item && otherQuestion && otherIcon) {
 						otherQuestion.setAttribute('aria-expanded', 'false');
-						otherAnswer.style.maxHeight = '0';
 						otherIcon.textContent = '+';
 						otherItem.classList.remove('active');
 					}
 				});
 				
-				// Toggle current item
 				if (isExpanded) {
 					question.setAttribute('aria-expanded', 'false');
-					answer.style.maxHeight = '0';
 					icon.textContent = '+';
 					item.classList.remove('active');
 				} else {
 					question.setAttribute('aria-expanded', 'true');
-					answer.style.maxHeight = answer.scrollHeight + 'px';
 					icon.textContent = '−';
 					item.classList.add('active');
 				}
@@ -153,7 +160,7 @@
 		border-radius: 12px;
 		margin-bottom: 1rem;
 		overflow: hidden;
-		transition: all 0.3s ease;
+		transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
 	}
 
 	.faq-item:hover {
@@ -178,7 +185,7 @@
 		text-align: left;
 		border: none;
 		cursor: pointer;
-		transition: all 0.2s ease;
+		transition: background-color 200ms var(--ease-out), border-color 200ms var(--ease-out);
 	}
 
 	.faq-question:hover {
@@ -189,7 +196,7 @@
 		font-size: 1.5rem;
 		color: var(--primary-color);
 		font-weight: 300;
-		transition: transform 0.3s ease;
+		transition: transform 160ms var(--ease-out);
 	}
 
 	.faq-item.active .faq-icon {
@@ -197,9 +204,18 @@
 	}
 
 	.faq-answer {
-		max-height: 0;
+		display: grid;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 250ms var(--ease-out);
+	}
+
+	.faq-item.active .faq-answer {
+		grid-template-rows: 1fr;
+	}
+
+	.faq-answer-inner {
 		overflow: hidden;
-		transition: max-height 0.3s ease;
+		min-height: 0;
 	}
 
 	.faq-answer p {
