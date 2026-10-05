@@ -23,7 +23,7 @@ export default defineConfig({
 				const value = String(page);
 				const pathname = value.startsWith('http') ? new URL(value).pathname : value;
 				if (['/404', '/404/', '/success', '/success/'].includes(pathname)) return false;
-				if (pathname.endsWith('/tsitsikamma-ultra-2026.gpx')) return false;
+				if (pathname.endsWith('.gpx')) return false;
 				return true;
 			},
 		}),

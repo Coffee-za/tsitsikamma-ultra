@@ -15,17 +15,27 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 				<div class="hero-content">
 					<div class="hero-text">
 						<h1 class="page-title">Runner's Guide</h1>
-						<p class="page-description">
-							Everything you need to know for race day. From mandatory gear requirements to race rules and cut-off times, this comprehensive guide will help you prepare for the ultimate Tsitsikamma trail running experience.
-						</p>
-						<a href="/tsitsikamma-ultra-2026.gpx" class="btn btn-primary download-btn" download="tsitsikamma-ultra-2026.gpx">
+					<p class="page-description">
+						Everything you need to know for race day. From mandatory gear requirements to race rules and cut-off times, this comprehensive guide will help you prepare for the ultimate Tsitsikamma trail running experience.
+					</p>
+					<div class="download-buttons">
+						<a href="/tsitsikamma-ultra-50km-2027.gpx" class="btn btn-primary download-btn" download="tsitsikamma-ultra-50km-2027.gpx">
 							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 								<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
 								<polyline points="7,10 12,15 17,10"/>
 								<line x1="12" y1="15" x2="12" y2="3"/>
 							</svg>
-							Download GPX Route
+							Ultra 50km GPX Route
 						</a>
+						<a href="/tsitsikamma-lite-30km-2027.gpx" class="btn btn-primary download-btn" download="tsitsikamma-lite-30km-2027.gpx">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+								<polyline points="7,10 12,15 17,10"/>
+								<line x1="12" y1="15" x2="12" y2="3"/>
+							</svg>
+							Lite 30km GPX Route
+						</a>
+					</div>
 					</div>
 					<div class="hero-image">
 						<Image src={runnersGuideHero} alt="Trail runner in forest" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 500px" loading="eager" />
@@ -467,6 +477,12 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 		line-height: 1.6;
 		margin-bottom: 2rem;
 		max-width: 500px;
+	}
+
+	.download-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
 	}
 
 	.download-btn {
