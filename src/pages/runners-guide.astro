@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
+import runnersGuideHero from '../assets/2026-Gallery/Carmen Claire/3-Forest-and-River/Tsitsikamma Ultra_Carmen Claire Photography17.jpg';
 
 ---
 
@@ -38,7 +38,7 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 					</div>
 					</div>
 					<div class="hero-image">
-						<Image src={runnersGuideHero} alt="Trail runner in forest" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 500px" loading="eager" />
+						<Image src={runnersGuideHero} alt="Trail runner on a forest path beside a large tree during the Tsitsikamma race - Photo: Carmen Claire" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 500px" loading="eager" />
 					</div>
 				</div>
 			</div>
@@ -457,9 +457,9 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 
 	.hero-image img {
 		width: 100%;
-		max-width: 500px;
-		height: 280px;
-		aspect-ratio: 16/9;
+		max-width: 420px;
+		height: auto;
+		aspect-ratio: 4 / 5;
 		object-fit: cover;
 		border-radius: 12px;
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -738,8 +738,9 @@ import runnersGuideHero from '../assets/photos/runners-guide-hero.webp';
 		}
 
 		.hero-image img {
-			height: 210px;
-			aspect-ratio: 16/9;
+			max-width: 320px;
+			height: auto;
+			aspect-ratio: 4 / 5;
 		}
 
 		.page-title {
